@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aidin Yaseri — Software Developer</title>
+<meta name="description" content="Aidin Yaseri: computer science student in Montréal building web apps, iOS telemetry, browser games and car diagnostic tools.">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2307080a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23ff5a1f' text-anchor='middle'%3EAY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ BOOT: OBD-style scan ============ -->
+<div id="boot" aria-hidden="true">
+  <pre id="boot-log"></pre>
+  <div class="boot-bar"><span></span></div>
+  <p class="boot-skip">press any key to skip</p>
+</div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"><span></span></div>
+
+<!-- ============ HUD ============ -->
+<header class="hud">
+  <a href="#top" class="hud-logo" aria-label="Home">AY<span>_</span></a>
+  <nav class="hud-nav" aria-label="Sections">
+    <a href="#about"><span>01</span><i data-i18n="nav.about">about</i></a>
+    <a href="#work"><span>02</span><i data-i18n="nav.work">work</i></a>
+    <a href="#log"><span>03</span><i data-i18n="nav.log">log</i></a>
+    <a href="#shell"><span>04</span><i data-i18n="nav.shell">shell</i></a>
+    <a href="#contact"><span>05</span><i data-i18n="nav.contact">contact</i></a>
+  </nav>
+  <div class="hud-right">
+    <button class="chip" id="lang" aria-label="Switch language">EN<b>/</b>FR</button>
+    <button class="chip" id="cmdk-open" aria-label="Open command palette"><kbd>Ctrl</kbd><kbd>K</kbd></button>
+  </div>
+</header>
+
+<!-- scroll tachometer -->
+<div class="tach" aria-hidden="true">
+  <svg viewBox="0 0 120 120">
+    <path class="tach-track" d="M 22 92 A 46 46 0 1 1 98 92"/>
+    <path class="tach-red" d="M 22 92 A 46 46 0 1 1 98 92"/>
+    <path class="tach-fill" d="M 22 92 A 46 46 0 1 1 98 92"/>
+    <g class="tach-ticks"></g>
+    <line class="tach-needle" x1="60" y1="60" x2="60" y2="20"/>
+    <circle cx="60" cy="60" r="4" fill="var(--hot)"/>
+  </svg>
+  <div class="tach-read"><b id="rpm">0</b><small>rpm ×1000</small></div>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-meta mono">
+    <span><i class="dot"></i><span data-i18n="hero.status">open to internships</span></span>
+    <span id="clock">MTL --:--:--</span>
+  </div>
+
+  <h1 class="hero-name">
+    <span class="line"><span class="scramble" data-text="AIDIN">AIDIN</span></span>
+    <span class="line indent"><span class="scramble" data-text="YASERI">YASERI</span><em class="serif">.</em></span>
+  </h1>
+
+  <div class="hero-foot">
+    <p class="hero-lede" data-i18n="hero.lede">Computer science student in Montréal. I build software that touches the real world — <em class="serif">car diagnostics</em>, <em class="serif">GPS telemetry</em>, full-stack apps and browser games that ship with zero asset files.</p>
+    <div class="hero-coords mono">
+      <span>45.5019° N</span><span>73.5674° W</span><span>JAC · D.E.C. 2024→</span>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-cue mono"><span data-i18n="hero.scroll">scroll to rev</span> <i></i></a>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <h2 class="sec-head"><span class="mono">01</span><span data-i18n="about.title">whoami</span></h2>
+
+  <div class="about-grid">
+    <p class="about-big reveal" data-i18n="about.big">I like taking an idea, hitting the hard technical wall, and getting past it until it's <em class="serif">actually useful</em>. Half my projects plug into a car.</p>
+
+    <div class="about-copy reveal">
+      <p data-i18n="about.p1">I'm doing my D.E.C. in Computer Science at John Abbott College, working across web, mobile, databases and vehicle diagnostics.</p>
+      <p data-i18n="about.p2">On the side I founded <strong>Apex Esthétique Auto</strong>, a mobile car detailing business. Pricing, booking, invoicing, branding, the website and the ads are all on me — so I'm used to real deadlines and real customers.</p>
+    </div>
+
+    <dl class="stats reveal">
+      <div><dt data-i18n="stat.repos">public repos</dt><dd><span class="count" data-to="12" id="repo-count">12</span></dd></div>
+      <div><dt data-i18n="stat.clients">regular clients, year 1</dt><dd>~<span class="count" data-to="30">30</span></dd></div>
+      <div><dt data-i18n="stat.langs">languages, fluent</dt><dd><span class="count" data-to="2">2</span><small>EN · FR</small></dd></div>
+      <div><dt data-i18n="stat.assets">asset files in my 3D game</dt><dd><span class="count" data-to="0">0</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="work" class="section">
+  <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
+  <p class="sec-sub mono" data-i18n="work.sub">// hover the cards. click one to open the repo.</p>
+
+  <div class="bento">
+
+    <a class="card c-xl" href="https://github.com/AidinYaseri/The-Last-Battery-" target="_blank" rel="noopener" data-repo="The-Last-Battery-">
+      <div class="card-art art-battery" aria-hidden="true">
+        <div class="phone"><div class="phone-bat"><span></span></div><b>5%</b><small data-i18n="p.battery.tag">find your way home</small></div>
+      </div>
+      <div class="card-body">
+        <div class="card-top mono"><span>Three.js · TypeScript · Vite</span><span class="updated"></span></div>
+        <h3>The Last Battery</h3>
+        <p data-i18n="p.battery">A first-person horror game in the browser. Five levels, four endings, and a phone at 5% that every action drains. Geometry, textures, photos, voices and music are all generated procedurally at runtime — the game ships with no asset files.</p>
+        <div class="langbar" data-langs='{"TypeScript":472914,"CSS":30853,"HTML":1155}'></div>
+      </div>
+    </a>
+
+    <a class="card c-tall" href="https://github.com/AidinYaseri/TrackYourDrag" target="_blank" rel="noopener" data-repo="TrackYourDrag">
+      <div class="card-art art-tracky" aria-hidden="true">
+        <div class="gauge-read mono"><b id="tracky-t">4.82</b><small>s · 0–100 km/h</small></div>
+        <svg viewBox="0 0 200 90" class="speedline"><path d="M0 88 C 40 86, 60 60, 90 40 S 150 12, 200 8"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-top mono"><span>Swift · SwiftUI · Core Motion</span><span class="updated"></span></div>
+        <h3>Tracky</h3>
+        <p data-i18n="p.tracky">Native iOS performance tracker. Fuses GPS, accelerometer, gyroscope and barometer to time 0–100, quarter miles and G-force, with auto-detected launch and finish.</p>
+        <div class="langbar" data-langs='{"Swift":446550,"Python":10550}'></div>
+      </div>
+    </a>
+
+    <a class="card c-wide" href="https://github.com/AidinYaseri/Team-5-Web-Programming" target="_blank" rel="noopener" data-repo="Team-5-Web-Programming">
+      <div class="card-art art-arch mono" aria-hidden="true">
+        <span>Blazor</span><i></i><span>API</span><i></i><span>Domain</span><i></i><span>EF Core</span><i></i><span>SQL</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top mono"><span>.NET 10 · Blazor · Keycloak</span><span class="updated"></span></div>
+        <h3>Animal Adoption</h3>
+        <p data-i18n="p.adopt">Team build with a layered ASP.NET Core API, Blazor Server client, OIDC sign-in with PKCE, EF Core on SQL Server and xUnit integration tests.</p>
+        <div class="langbar" data-langs='{"C#":451674,"HTML":49011,"CSS":11784,"JavaScript":2385}'></div>
+      </div>
+    </a>
+
+    <a class="card" href="https://github.com/AidinYaseri/Obd_project" target="_blank" rel="noopener" data-repo="Obd_project">
+      <div class="card-art art-obd mono" aria-hidden="true"><span>P0301</span><span>P0171</span><span class="ok">P0000</span></div>
+      <div class="card-body">
+        <div class="card-top mono"><span>Python · OBD-II</span><span class="updated"></span></div>
+        <h3>CarSync</h3>
+        <p data-i18n="p.obd">Plugs into a car, pulls trouble codes from the engine computer and turns raw data into plain answers. Tested on real cars, not just in class.</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://github.com/AidinYaseri/Webll-Final-Finance-Tracker" target="_blank" rel="noopener" data-repo="Webll-Final-Finance-Tracker">
+      <div class="card-art art-fin" aria-hidden="true"><i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:30%"></i><i style="--h:80%"></i><i style="--h:55%"></i><i style="--h:90%"></i></div>
+      <div class="card-body">
+        <div class="card-top mono"><span>TypeScript · Docker</span><span class="updated"></span></div>
+        <h3 data-i18n="p.fin.t">Finance Tracker</h3>
+        <p data-i18n="p.fin">Full-stack income and expense tracker with auth, categories, a REST API and a dashboard. Containerised.</p>
+      </div>
+    </a>
+
+    <div class="card">
+      <div class="card-art art-park" aria-hidden="true"><i></i><i class="f"></i><i></i><i></i><i class="f"></i><i></i><i class="f"></i><i></i></div>
+      <div class="card-body">
+        <div class="card-top mono"><span data-i18n="p.park.tag">Hackathon · team of 4</span></div>
+        <h3 data-i18n="p.park.t">Campus Parking</h3>
+        <p data-i18n="p.park">Real-time map of free spots on campus. I did the location tracking and phone UI, then reworked it on feedback from other students at the event.</p>
+      </div>
+    </div>
+
+    <a class="card" href="https://aidinyaseri.github.io/Soccer-Score-keeper/" target="_blank" rel="noopener" data-repo="Soccer-Score-keeper">
+      <div class="card-art art-score mono" aria-hidden="true"><b>2</b><span>:</span><b>1</b></div>
+      <div class="card-body">
+        <div class="card-top mono"><span>JavaScript · API-Football</span><span class="live">live ↗</span></div>
+        <h3>Score Keeper</h3>
+        <p data-i18n="p.score">Live and past soccer scores browsable from a calendar, fed by a sports API. Designed in Figma first.</p>
+      </div>
+    </a>
+
+    <a class="card c-full" href="https://github.com/AidinYaseri/Sales_map_WPA" target="_blank" rel="noopener" data-repo="Sales_map_WPA">
+      <div class="card-art art-map" aria-hidden="true"><i style="--x:20%;--y:30%"></i><i style="--x:62%;--y:52%"></i><i style="--x:40%;--y:72%"></i><i style="--x:78%;--y:24%"></i></div>
+      <div class="card-body">
+        <div class="card-top mono"><span>JavaScript · Vite</span><span class="updated"></span></div>
+        <h3>Sales Map</h3>
+        <p data-i18n="p.map">A map-based web app for plotting and tracking sales territory.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ LOG ============ -->
+<section id="log" class="section">
+  <h2 class="sec-head"><span class="mono">03</span><span data-i18n="log.title">changelog</span></h2>
+
+  <ol class="timeline">
+    <li class="reveal">
+      <span class="t-when mono" data-i18n="log.1.when">2025 → now</span>
+      <div>
+        <h3 data-i18n="log.1.role">Owner / Founder</h3>
+        <p class="t-where mono">Apex Esthétique Auto · Montréal</p>
+        <p data-i18n="log.1.body">Started a mobile car detailing business and grew it to about 30 regular clients in year one across Greater Montréal. I run everything: pricing, booking, invoicing, branding, the website and the ads.</p>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="t-when mono" data-i18n="log.2.when">2024 → now</span>
+      <div>
+        <h3 data-i18n="log.2.role">D.E.C. in Computer Science</h3>
+        <p class="t-where mono">John Abbott College · Sainte-Anne-de-Bellevue</p>
+        <p data-i18n="log.2.body">Web programming, app development, databases, game programming and security, plus a lot of team projects.</p>
+      </div>
+    </li>
+    <li class="reveal">
+      <span class="t-when mono" data-i18n="log.3.when">summers 2023 & 2024</span>
+      <div>
+        <h3 data-i18n="log.3.role">Day Camp Monitor</h3>
+        <p class="t-where mono">Ville de l'Île-Perrot</p>
+        <p data-i18n="log.3.body">Ran daily activities for groups of up to 30 kids, as part of a staff team of about 25, and kept everyone safe.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="stack reveal">
+    <h3 class="mono" data-i18n="stack.title">// spec sheet</h3>
+    <table>
+      <tr><th data-i18n="stack.lang">languages</th><td>C# · Python · TypeScript · JavaScript · Swift · SQL · Bash · PowerShell</td></tr>
+      <tr><th data-i18n="stack.web">web</th><td>React · Blazor · ASP.NET Core · Three.js · Vite · HTML · CSS</td></tr>
+      <tr><th data-i18n="stack.data">data</th><td>SQL Server · PostgreSQL · MySQL · MongoDB · EF Core</td></tr>
+      <tr><th data-i18n="stack.tools">tools</th><td>Git · Docker · Keycloak · Arduino · OBD-II diagnostics</td></tr>
+      <tr><th data-i18n="stack.cert">certs</th><td>Google AI Prompting</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SHELL ============ -->
+<section id="shell" class="section">
+  <h2 class="sec-head"><span class="mono">04</span><span data-i18n="shell.title">try the shell</span></h2>
+  <div class="term reveal" id="term">
+    <div class="term-bar mono"><i></i><i></i><i></i><span>guest@aidin: ~</span></div>
+    <div class="term-out mono" id="term-out" aria-live="polite"></div>
+    <label class="term-in mono"><span class="prompt">guest@aidin:~$</span><input id="term-input" autocomplete="off" spellcheck="false" aria-label="Terminal input"></label>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="section contact">
+  <p class="mono contact-pre" data-i18n="contact.pre">// looking for a software development internship</p>
+  <a class="contact-big" href="mailto:aidiny2000@gmail.com" id="mail">
+    <span data-i18n="contact.big">Let's build</span> <em class="serif" data-i18n="contact.em">something.</em>
+  </a>
+  <div class="contact-links mono">
+    <a href="mailto:aidiny2000@gmail.com">aidiny2000@gmail.com</a>
+    <a href="https://github.com/AidinYaseri" target="_blank" rel="noopener">github/AidinYaseri ↗</a>
+    <a href="https://www.linkedin.com/in/aidin-yaseri/" target="_blank" rel="noopener">linkedin/aidin-yaseri ↗</a>
+  </div>
+  <footer class="mono">
+    <span>© <span id="year">2026</span> Aidin Yaseri</span>
+    <span data-i18n="footer.built">hand-built: WebGL shader, no framework</span>
+    <span class="hint">↑↑↓↓←→←→BA</span>
+  </footer>
+</section>
+
+</main>
+
+<!-- ============ COMMAND PALETTE ============ -->
+<dialog id="cmdk" aria-label="Command palette">
+  <input id="cmdk-input" placeholder="Type a command…" autocomplete="off" spellcheck="false">
+  <ul id="cmdk-list" role="listbox"></ul>
+  <p class="mono cmdk-foot">↑↓ navigate · ↵ run · esc close</p>
+</dialog>
+
+<script src="main.js" type="module"></script>
+</body>
+</html>
