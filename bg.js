@@ -55,11 +55,11 @@ let scrollVel = 0, lastY = scrollY;
     pointer.x += (pointer.tx - pointer.x) * .05; pointer.y += (pointer.ty - pointer.y) * .05;
     redMix += ((document.body.classList.contains('redline') ? 1 : 0) - redMix) * .05;
     g.uniform2f(ur, c.width, c.height);
-    g.uniform1f(ut, reduced ? 10 : (now - t0) / 1000);
+    g.uniform1f(ut, (now - t0) / 1000 * (reduced ? .5 : 1)); // always animate; slower if the OS asks for reduced motion
     g.uniform2f(um, pointer.x, 1 - pointer.y);
     g.uniform1f(us, scrollY); g.uniform1f(uv, Math.min(scrollVel, 1)); g.uniform1f(ured, redMix);
     g.drawArrays(g.TRIANGLES, 0, 3);
-    if (visible && !reduced) requestAnimationFrame(loop);
+    if (visible) requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 })();

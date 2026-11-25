@@ -29,7 +29,9 @@ const CH = [
   {
     id: 'battery', related: ['tracky','fin'], n: '01', stack: 'Three.js · TypeScript · Vite', url: 'https://github.com/AidinYaseri/The-Last-Battery-', name: 'The Last Battery',
     q: { en: 'What would you spend your last 5% on?', fr: 'Que ferais-tu avec ton dernier 5 %?' },
-    p: { en: 'In my browser horror game you’re lost in a forest at night, and every action on your phone costs battery. Try it: each app you tap reveals something about how the game was built. You won’t see everything before it dies.', fr: 'Dans mon jeu d’horreur web, tu es perdu en forêt la nuit et chaque action sur ton téléphone coûte de la batterie. Essaie : chaque appli révèle un détail sur la conception du jeu. Tu ne verras pas tout avant qu’il meure.' },
+    p: {"en": "A first-person mystery / horror game that runs in the browser. You wake up alone in a forest at night with a phone at 5%, and you have to find your way home before it dies.", "fr": "Un jeu de mystère / horreur à la première personne qui roule dans le navigateur. Tu te réveilles seul en forêt la nuit avec un téléphone à 5 % et tu dois rentrer avant qu’il meure."},
+    ex: [{"en": "The battery is the core mechanic: the map, GPS, photos, the torch, calls and messages all drain it, and it never refills on its own.", "fr": "La batterie est la mécanique centrale : carte, GPS, photos, lampe, appels et messages la vident, et elle ne se recharge jamais seule."}, {"en": "Five levels and four endings, with power banks, a car charger and a wall outlet hidden along the way.", "fr": "Cinq niveaux et quatre fins, avec batteries externes, chargeur d’auto et prise murale cachés en chemin."}, {"en": "Everything is generated in code at runtime: geometry, textures, photos, sound effects, voices and music. The game ships with no asset files.", "fr": "Tout est généré par le code à l’exécution : géométrie, textures, photos, effets sonores, voix et musique. Aucun fichier d’asset."}, {"en": "Built with Three.js and TypeScript on Vite, with procedural audio through WebAudio and autosave to localStorage.", "fr": "Fait avec Three.js et TypeScript sur Vite, audio procédural avec WebAudio et sauvegarde auto dans localStorage."}],
+    how: {"en": "Your phone is at 5%. Tap the apps: each one costs battery, just like in the game, and reveals a detail about how it was built.", "fr": "Ton téléphone est à 5 %. Touche les applis : chacune coûte de la batterie, comme dans le jeu, et révèle un détail sur sa conception."},
     secret: { en: 'Debug flags I left in: <code>?fps</code> shows a draw-call counter, <code>?debug&level=3</code> jumps to a level, <code>?nolock</code> disables pointer lock for automated tests.', fr: 'Des options de débogage laissées dedans : <code>?fps</code> affiche les draw calls, <code>?debug&level=3</code> saute à un niveau, <code>?nolock</code> désactive le verrouillage du pointeur pour les tests automatisés.' },
     lock: { en: 'drain the battery to 0%', fr: 'vide la batterie à 0 %' },
     next: { en: 'Next: a phone that knows your 0–100 time better than your speedometer does.', fr: 'Ensuite : un téléphone qui connaît ton 0–100 mieux que ton compteur.' },
@@ -39,7 +41,9 @@ const CH = [
   {
     id: 'tracky', related: ['obd','battery'], n: '02', stack: 'Swift · SwiftUI · Core Motion', url: 'https://github.com/AidinYaseri/TrackYourDrag', name: 'Tracky',
     q: { en: 'How fast are your reflexes off the line?', fr: 'Tes réflexes au départ, ils valent combien?' },
-    p: { en: 'Tracky is my iOS app that times real launches using GPS, accelerometer, gyroscope and barometer. It detects the launch by itself. Here you’re the launch detector: wait for green, then go.', fr: 'Tracky est mon appli iOS qui chronomètre de vrais départs avec GPS, accéléromètre, gyroscope et baromètre. Elle détecte le départ toute seule. Ici, c’est toi le détecteur : attends le vert, puis go.' },
+    p: {"en": "A native iOS app for car enthusiasts that measures real acceleration runs and keeps a history you can sort, chart, map and compare.", "fr": "Une appli iOS native pour passionnés d’auto qui mesure de vraies accélérations et garde un historique à trier, graphiquer, cartographier et comparer."},
+    ex: [{"en": "Uses the iPhone’s GPS, accelerometer, gyroscope and barometer to measure speed, G-force and elevation.", "fr": "Utilise le GPS, l’accéléromètre, le gyroscope et le baromètre de l’iPhone pour mesurer vitesse, forces G et altitude."}, {"en": "Times 0–100 km/h, 0–60 mph, 1/8, 1/4 and 1/2 mile with trap speed, or any custom speed or distance.", "fr": "Chronomètre le 0–100 km/h, le 0–60 mph, le 1/8, 1/4 et 1/2 mille avec vitesse de sortie, ou toute vitesse ou distance personnalisée."}, {"en": "You arm it once. The launch and the finish are detected automatically, so nothing has to be touched while the car is moving.", "fr": "Tu l’armes une fois. Le départ et l’arrivée sont détectés automatiquement : rien à toucher pendant que l’auto roule."}, {"en": "Swift, SwiftUI, SwiftData, Core Location, Core Motion, MapKit and Swift Charts, on iOS 17 and later.", "fr": "Swift, SwiftUI, SwiftData, Core Location, Core Motion, MapKit et Swift Charts, sur iOS 17 et plus."}],
+    how: {"en": "Here you’re the launch detector. Press to arm, wait for the green light, then press again as fast as you can. Your reaction time sets your 0–100.", "fr": "Ici, c’est toi le détecteur de départ. Appuie pour armer, attends le vert, puis appuie le plus vite possible. Ta réaction fixe ton 0–100."},
     secret: { en: 'Any two saved runs can be compared with their speed curves overlaid, and every run keeps a GPS quality report so you know if the time is trustworthy.', fr: 'Deux courses peuvent être comparées avec leurs courbes de vitesse superposées, et chaque course garde un rapport de qualité GPS pour savoir si le temps est fiable.' },
     lock: { en: 'run a 0–100 under 4.60 s', fr: 'fais un 0–100 sous 4,60 s' },
     next: { en: 'Next: what your check-engine light is actually trying to tell you.', fr: 'Ensuite : ce que ton voyant moteur essaie vraiment de te dire.' },
@@ -49,7 +53,9 @@ const CH = [
   {
     id: 'obd', related: ['tracky','adopt'], n: '03', stack: 'Python · OBD-II', url: 'https://github.com/AidinYaseri/Obd_project', name: 'CarSync',
     q: { en: 'What is your check-engine light hiding?', fr: 'Que cache ton voyant moteur?' },
-    p: { en: 'CarSync plugs into a car’s OBD-II port, pulls the trouble codes from the engine computer and turns them into plain language. I tested it on real cars. Plug in below and read some codes.', fr: 'CarSync se branche au port OBD-II, lit les codes d’erreur de l’ordinateur du moteur et les traduit en langage clair. Testé sur de vraies voitures. Branche-toi et lis quelques codes.' },
+    p: {"en": "A Python tool that plugs into a car’s OBD-II port, reads the trouble codes stored in the engine computer and turns them into plain language.", "fr": "Un outil Python qui se branche au port OBD-II d’une voiture, lit les codes d’erreur stockés dans l’ordinateur du moteur et les traduit en langage clair."},
+    ex: [{"en": "Talks to the car through an OBD-II adapter and requests the stored diagnostic trouble codes.", "fr": "Communique avec la voiture par un adaptateur OBD-II et demande les codes de diagnostic stockés."}, {"en": "Turns raw codes like P0301 into something a driver understands: “cylinder 1 misfire”.", "fr": "Transforme des codes bruts comme P0301 en quelque chose de compréhensible : « raté d’allumage au cylindre 1 »."}, {"en": "Tested on my own cars to make sure it holds up outside a classroom.", "fr": "Testé sur mes propres voitures pour m’assurer qu’il tient la route hors de la classe."}],
+    how: {"en": "The scanner below is connected. Pick codes stored in the ECU and watch them get decoded.", "fr": "Le scanneur ci-dessous est branché. Choisis des codes stockés dans l’ECU et regarde-les se décoder."},
     secret: { en: 'It ships as a standalone desktop app: the repo has a PyInstaller spec (<code>CarSync.spec</code>), so a mechanic doesn’t need Python installed.', fr: 'C’est une appli de bureau autonome : le dépôt a un fichier PyInstaller (<code>CarSync.spec</code>), donc un mécanicien n’a pas besoin d’installer Python.' },
     lock: { en: 'decode 3 different codes', fr: 'décode 3 codes différents' },
     next: { en: 'Next: follow one click through six layers of a .NET app.', fr: 'Ensuite : suis un clic à travers six couches d’une appli .NET.' },
@@ -59,7 +65,9 @@ const CH = [
   {
     id: 'adopt', related: ['fin','obd'], n: '04', stack: '.NET 10 · Blazor · Keycloak · SQL Server', url: 'https://github.com/AidinYaseri/Team-5-Web-Programming', name: 'Animal Adoption',
     q: { en: 'What happens in the 300 ms after you click “Adopt”?', fr: 'Que se passe-t-il dans les 300 ms après un clic sur « Adopter »?' },
-    p: { en: 'A team project built like production: a Blazor client, an ASP.NET Core API, Keycloak sign-in and EF Core on SQL Server. Send a request and watch where it goes.', fr: 'Un projet d’équipe bâti comme en production : client Blazor, API ASP.NET Core, connexion Keycloak et EF Core sur SQL Server. Envoie une requête et regarde où elle passe.' },
+    p: {"en": "An animal adoption platform built as a team project for Web Programming III, structured like a production .NET application.", "fr": "Une plateforme d’adoption d’animaux bâtie en équipe pour Programmation Web III, structurée comme une vraie application .NET de production."},
+    ex: [{"en": "ASP.NET Core REST API with application services, a domain layer for business rules and EF Core repositories on SQL Server.", "fr": "API REST ASP.NET Core avec services applicatifs, couche domaine pour les règles d’affaires et dépôts EF Core sur SQL Server."}, {"en": "A Blazor Server client that talks to the API over HTTP through typed clients.", "fr": "Un client Blazor Server qui parle à l’API en HTTP avec des clients typés."}, {"en": "Sign-in through Keycloak with OpenID Connect. The API checks JWT bearer tokens, scope policies and a staff role.", "fr": "Connexion par Keycloak avec OpenID Connect. L’API vérifie les jetons JWT, les politiques de portée et un rôle staff."}, {"en": "xUnit unit tests and API integration tests, with architecture diagrams in Mermaid.", "fr": "Tests unitaires xUnit et tests d’intégration de l’API, avec diagrammes d’architecture en Mermaid."}],
+    how: {"en": "Send an adoption request and step through every layer it passes before the database answers.", "fr": "Envoie une demande d’adoption et suis chaque couche qu’elle traverse avant que la base de données réponde."},
     secret: { en: 'The client references none of the backend projects. The API resolves the token’s <code>sub</code> claim to <code>User.ExternalId</code>, so identity lives in Keycloak and data lives in SQL.', fr: 'Le client ne référence aucun projet backend. L’API associe le <code>sub</code> du jeton à <code>User.ExternalId</code> : l’identité vit dans Keycloak, les données dans SQL.' },
     lock: { en: 'trace a request end to end', fr: 'trace une requête de bout en bout' },
     next: { en: 'Next: a budget app. Spend some fake money.', fr: 'Ensuite : une appli de budget. Dépense de l’argent fictif.' },
@@ -69,7 +77,9 @@ const CH = [
   {
     id: 'fin', related: ['adopt','side'], n: '05', stack: 'TypeScript · REST · Docker', url: 'https://github.com/AidinYaseri/Webll-Final-Finance-Tracker', name: { en: 'Finance Tracker', fr: 'Suivi financier' },
     q: { en: 'Where does a student’s money actually go?', fr: 'Où va vraiment l’argent d’un étudiant?' },
-    p: { en: 'A full-stack tracker with accounts, categories and a dashboard, planned as user stories and an ER diagram first. Add a few transactions and see the API calls the real app makes.', fr: 'Un suivi full-stack avec comptes, catégories et tableau de bord, planifié d’abord en user stories et diagramme ER. Ajoute quelques transactions et vois les appels API de la vraie appli.' },
+    p: {"en": "A full-stack personal finance web app for students: create an account, record income and expenses, sort them into categories and see where the money goes.", "fr": "Une appli web full-stack de finances personnelles pour étudiants : crée un compte, note revenus et dépenses, classe-les par catégorie et vois où va l’argent."},
+    ex: [{"en": "Planned first as user stories (auth, transactions, categories, dashboard) and an entity-relationship diagram.", "fr": "Planifiée d’abord en user stories (auth, transactions, catégories, tableau de bord) et en diagramme entité-relation."}, {"en": "REST API with routes to register, log in and create, read, update and delete transactions.", "fr": "API REST avec des routes pour s’inscrire, se connecter et créer, lire, modifier et supprimer des transactions."}, {"en": "A dashboard with the total balance, income versus expenses and spending summaries.", "fr": "Un tableau de bord avec le solde total, revenus contre dépenses et résumés de dépenses."}, {"en": "Written in TypeScript.", "fr": "Écrite en TypeScript."}],
+    how: {"en": "Add a few transactions. The balance and category bars update, and you’ll see the API call the real app makes.", "fr": "Ajoute quelques transactions. Le solde et les barres se mettent à jour, et tu vois l’appel API que fait la vraie appli."},
     secret: { en: 'Three tables do all the work: USERS has many TRANSACTIONS, CATEGORIES classify them. The whole thing runs in Docker.', fr: 'Trois tables font tout : USERS a plusieurs TRANSACTIONS, CATEGORIES les classe. Le tout roule dans Docker.' },
     lock: { en: 'add 3 transactions', fr: 'ajoute 3 transactions' },
     next: { en: 'Last: three side quests, including one built in a single hackathon.', fr: 'Dernier : trois quêtes secondaires, dont une bâtie en un seul hackathon.' },
@@ -79,7 +89,9 @@ const CH = [
   {
     id: 'side', related: ['fin','battery'], n: '06', stack: { en: 'side quests', fr: 'quêtes secondaires' }, url: null, name: { en: 'Side quests', fr: 'Quêtes secondaires' },
     q: { en: 'Three smaller builds. Can you open all three?', fr: 'Trois petits projets. Peux-tu ouvrir les trois?' },
-    p: { en: 'A hackathon parking map, a live soccer score site and a sales map. Flip each card.', fr: 'Une carte de stationnement de hackathon, un site de scores de soccer en direct et une carte de ventes. Retourne chaque carte.' },
+    p: {"en": "Three smaller projects: one built at a hackathon, one live website and one map app.", "fr": "Trois petits projets : un bâti lors d’un hackathon, un site en ligne et une appli de carte."},
+    ex: [{"en": "Campus Parking: a real-time map of free parking spots on campus, built with a team of four at a hackathon. I worked on location tracking and the phone interface.", "fr": "Stationnement du campus : une carte en temps réel des places libres, bâtie à quatre lors d’un hackathon. J’ai fait la localisation et l’interface mobile."}, {"en": "Score Keeper: current and past soccer scores, browsable from a calendar, using API-Football. It’s live on GitHub Pages.", "fr": "Score Keeper : scores de soccer actuels et passés, par calendrier, avec API-Football. En ligne sur GitHub Pages."}, {"en": "Sales Map: a map-based JavaScript app, built with Vite, for tracking a sales territory.", "fr": "Sales Map : une appli JavaScript cartographique, faite avec Vite, pour suivre un territoire de ventes."}],
+    how: {"en": "Flip each card to open it.", "fr": "Retourne chaque carte pour l’ouvrir."},
     secret: { en: 'The Campus Parking app was reworked live at the hackathon from other students’ feedback, and Score Keeper was designed entirely in Figma before any code.', fr: 'L’appli de stationnement a été retravaillée sur place selon les commentaires d’autres étudiants, et Score Keeper a été entièrement conçu dans Figma avant le code.' },
     lock: { en: 'flip all 3 cards', fr: 'retourne les 3 cartes' },
     next: null,
@@ -91,7 +103,6 @@ const CH = [
 /* =========================================================
    Shell: rail, chapter, secrets, recommendations, debrief
    ========================================================= */
-const GLYPH = { battery: '5%', tracky: '0–100', obd: 'P0301', adopt: '201', fin: '$', side: '?' };
 const pageFor = id => `project.html?p=${id}`;
 const fr = () => lang() === 'fr';
 
@@ -99,17 +110,28 @@ function chapterHTML(c) {
   const got = S.secrets[c.id];
   const i = CH.indexOf(c), nx = CH[(i + 1) % CH.length];
   return `<article class="chapter" id="ch-${c.id}" data-ch="${c.id}">
-    <div class="ch-story">
-      <p class="mono ch-n"><span>case ${c.n}</span> ${L(c.stack)}</p>
-      <h3 class="ch-q">${L(c.q)}</h3>
-      <p class="ch-p">${L(c.p)}</p>
+    <section class="ch-explain">
+      <div class="ch-intro">
+        <p class="mono ch-n"><span>case ${c.n}</span> ${L(c.stack)}</p>
+        <h1 class="ch-name">${L(c.name)}</h1>
+        <p class="ch-p">${L(c.p)}</p>
+        ${c.url ? `<a class="mono ch-src" href="${c.url}" target="_blank" rel="noopener">${fr() ? 'voir le code source' : 'view source code'} ↗</a>` : ''}
+      </div>
+      <div class="ch-how-it">
+        <p class="mono try-k">${fr() ? '// comment ça marche' : '// how it works'}</p>
+        <ol class="ch-points">${(c.ex || []).map(x => `<li>${L(x)}</li>`).join('')}</ol>
+      </div>
+    </section>
+    <section class="ch-try">
+      <p class="mono try-k">${fr() ? '// maintenant, essaie-le ↓' : '// now try it yourself ↓'}</p>
+      <h2 class="ch-q">${L(c.q)}</h2>
+      <p class="ch-p try-how">${L(c.how)}</p>
+      <div class="ch-demo" data-demo="${c.id}"></div>
       <div class="secret ${got ? 'open' : ''}" data-secret="${c.id}">
         <p class="mono secret-k">${got ? '🔓 ' + (fr() ? 'secret débloqué' : 'secret unlocked') : '🔒 ' + (fr() ? 'secret verrouillé · ' : 'locked secret · ') + L(c.lock)}</p>
         <p class="secret-v">${got ? L(c.secret) : '████ ██████ ███ █████████ ██ ████ ███████ ██ ███ ████████ ███'}</p>
       </div>
-      <p class="mono ch-links">${c.url ? `<a href="${c.url}" target="_blank" rel="noopener">${fr() ? 'code source' : 'source code'} ↗</a>` : ''}</p>
-    </div>
-    <div class="ch-demo" data-demo="${c.id}"></div>
+    </section>
     ${c.next ? `<a class="mono ch-next" href="${pageFor(nx.id)}"><span>${L(c.next)}</span> <b>→</b></a>` : ''}
   </article>`;
 }
@@ -121,7 +143,6 @@ function status(c) {
 }
 function thumb(c, extra = '') {
   return `<a class="rec ${extra}" href="${pageFor(c.id)}" data-id="${c.id}">
-    <span class="rec-art rec-${c.id}"><b class="mono">${GLYPH[c.id]}</b></span>
     <span class="rec-body">
       <small class="mono">case ${c.n} · ${L(c.stack)}</small>
       <b>${L(c.name)}</b>
@@ -144,7 +165,7 @@ function recsHTML(cur) {
     ${bundle.length ? `<div class="recs-block">
       <h3 class="recs-h">${fr() ? 'À explorer ensemble' : 'Explore these together'}</h3>
       <div class="bundle">
-        ${bundle.map((x, i) => `${i ? '<span class="plus">+</span>' : ''}<a class="bundle-item ${x.id === cur ? 'this' : ''}" href="${pageFor(x.id)}"><span class="rec-art rec-${x.id}"><b class="mono">${GLYPH[x.id]}</b></span><small class="mono">${x.id === cur ? (fr() ? 'ce projet' : 'this project') : 'case ' + x.n}</small><b>${L(x.name)}</b></a>`).join('')}
+        ${bundle.map((x, i) => `${i ? '<span class="plus">+</span>' : ''}<a class="bundle-item ${x.id === cur ? 'this' : ''}" href="${pageFor(x.id)}"><small class="mono">${x.id === cur ? (fr() ? 'ce projet' : 'this project') : 'case ' + x.n}</small><b>${L(x.name)}</b></a>`).join('')}
         <div class="bundle-total">
           <p class="mono">${bundle.filter(x => S.secrets[x.id]).length}/${bundle.length} ${fr() ? 'secrets trouvés' : 'secrets found'}</p>
           <p class="bundle-price">~${bundle.length * 2} min</p>
@@ -160,7 +181,7 @@ function recsHTML(cur) {
     </div>
     ${hist.length ? `<div class="recs-block">
       <h3 class="recs-h">${fr() ? 'Ton historique' : 'Your browsing history'}</h3>
-      <div class="hist">${hist.map(x => `<a href="${pageFor(x.id)}" class="hist-i"><span class="rec-art rec-${x.id}"><b class="mono">${GLYPH[x.id]}</b></span><small>${L(x.name)}</small></a>`).join('')}</div>
+      <div class="hist">${hist.map(x => `<a href="${pageFor(x.id)}" class="hist-i"><small class="mono">case ${x.n}</small><b>${L(x.name)}</b></a>`).join('')}</div>
     </div>` : ''}`;
 }
 
