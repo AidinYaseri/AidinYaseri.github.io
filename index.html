@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="reels.css">
+<link rel="stylesheet" href="chapters.css">
 </head>
 <body>
 
@@ -103,49 +103,16 @@
 <!-- ============ WORK ============ -->
 <section id="work" class="section">
   <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
-  <div class="work-bar">
-    <p class="sec-sub mono" data-i18n="work.sub">// swipe up for the next project. tap the sides to go deeper.</p>
-    <div class="view-toggle mono" role="tablist">
-      <button class="on" data-view="reels" role="tab" aria-selected="true">▮ reels</button>
-      <button data-view="grid" role="tab" aria-selected="false">⊞ grid</button>
-    </div>
-  </div>
+  <p class="sec-sub mono" data-i18n="work.sub">// don't read about my projects. play with them.</p>
 
-  <div class="reels" id="reels">
-    <!-- left: rabbit-hole meter -->
-    <aside class="hole">
-      <p class="mono hole-k" data-i18n="rh.depth">rabbit-hole depth</p>
-      <div class="hole-n"><b id="rh-seen">0</b><span>/<span id="rh-total">0</span></span></div>
-      <div class="hole-shaft" aria-hidden="true"><i id="rh-fill"></i></div>
-      <p class="mono hole-k" data-i18n="rh.time">time down here</p>
-      <div class="hole-t mono" id="rh-time">0:00</div>
-      <ul class="hole-badges mono" id="rh-badges"></ul>
-      <p class="mono hole-keys"><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="rh.k1">projects</span> · <kbd>←</kbd><kbd>→</kbd> <span data-i18n="rh.k2">deeper</span> · <kbd>L</kbd> <span data-i18n="rh.k3">like</span></p>
-    </aside>
+  <!-- sticky progress: what's explored, what's still hidden -->
+  <div class="files-rail" id="files-rail" aria-label="Exploration progress"></div>
 
-    <!-- center: the phone -->
-    <div class="reel-phone" id="reel-phone">
-      <div class="feed" id="feed" tabindex="0" aria-label="Project reels. Arrow keys: up and down for projects, left and right for slides."></div>
-      <div class="bars" id="bars" aria-hidden="true"></div>
-      <div class="reel-top mono" aria-hidden="true"><span class="rt-av">AY</span><b>aidin.yaseri</b><span id="rt-proj"></span><span class="rt-pause" id="rt-pause">❚❚</span></div>
-      <div class="rail" id="rail">
-        <button id="r-like" aria-label="Like"><span class="ri">♥</span><small id="r-like-n">0</small></button>
-        <button id="r-deeper" aria-label="Go deeper"><span class="ri">↳</span><small data-i18n="rh.deeper">deeper</small></button>
-        <a id="r-open" target="_blank" rel="noopener" aria-label="Open project"><span class="ri">↗</span><small data-i18n="rh.open">open</small></a>
-        <button id="r-share" aria-label="Copy link"><span class="ri">⧉</span><small data-i18n="rh.share">share</small></button>
-      </div>
-      <div class="swipe-hint mono" id="swipe-hint" aria-hidden="true"><span>↑</span><b data-i18n="rh.hint">swipe up</b></div>
-      <div class="reel-toast mono" id="reel-toast" role="status"></div>
-    </div>
+  <div id="chapters"></div>
 
-    <!-- right: up next -->
-    <aside class="upnext">
-      <p class="mono hole-k" data-i18n="rh.next">up next</p>
-      <ol id="upnext"></ol>
-    </aside>
-  </div>
-
-  <div class="bento" id="garage" hidden>
+  <details class="glance">
+    <summary class="mono" data-i18n="work.glance">in a hurry? all projects at a glance ↓</summary>
+  <div class="bento" id="garage">
 
     <a class="card c-xl" href="https://github.com/AidinYaseri/The-Last-Battery-" target="_blank" rel="noopener" data-repo="The-Last-Battery-">
       <div class="card-art art-battery" aria-hidden="true">
@@ -230,6 +197,7 @@
     </a>
 
   </div>
+  </details>
 </section>
 
 <!-- ============ LOG ============ -->
@@ -313,6 +281,6 @@
 </dialog>
 
 <script src="main.js" type="module"></script>
-<script src="reels.js" type="module"></script>
+<script src="chapters.js" type="module"></script>
 </body>
 </html>
