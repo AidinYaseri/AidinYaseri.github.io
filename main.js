@@ -18,13 +18,9 @@ const FR = {
   'about.p1': 'Je fais mon D.E.C. en informatique au Collège John Abbott : web, mobile, bases de données et diagnostic automobile.',
   'about.p2': 'À côté, j’ai fondé <strong>Apex Esthétique Auto</strong>, une entreprise mobile de détaillage automobile. Tarifs, rendez-vous, facturation, image de marque, site web et publicités : tout passe par moi — de vraies échéances, de vrais clients.',
   'stat.repos': 'dépôts publics', 'stat.clients': 'clients réguliers, an 1', 'stat.langs': 'langues, couramment', 'stat.assets': 'fichiers d’asset dans mon jeu 3D',
-  'work.title': 'projets choisis', 'work.sub': '// mes projets sont garés quelque part dans ce labyrinthe. trouve-les.',
-  'mz.pre': '// choisis ta route', 'mz.q': 'Comment veux-tu voir mes projets?',
-  'mz.a': 'Prendre les petites routes', 'mz.a.d': 'Conduis dans un labyrinthe dans le noir. Chaque balise débloque un projet. ~2 min.',
-  'mz.b': 'Prendre l’autoroute', 'mz.b.d': 'Pressé? Débloque tous les projets maintenant.',
-  'mz.found': 'projets trouvés', 'mz.empty': 'Conduis jusqu’à une balise orange pour débloquer un projet. La verte, c’est la sortie.',
-  'mz.keys': 'ou flèches · clique une case pour y conduire', 'mz.skip': 'passer → tout débloquer', 'mz.reset': 'nouveau labyrinthe',
-  'mz.garage': '// garage — projets débloqués',
+  'work.title': 'projets choisis', 'work.sub': '// glisse vers le haut pour le projet suivant. touche les côtés pour creuser.',
+  'rh.depth': 'profondeur du terrier', 'rh.time': 'temps passé ici', 'rh.k1': 'projets', 'rh.k2': 'creuser', 'rh.k3': 'aimer',
+  'rh.deeper': 'creuser', 'rh.open': 'ouvrir', 'rh.share': 'partager', 'rh.hint': 'glisse vers le haut', 'rh.next': 'à suivre',
   'p.battery.tag': 'retrouve ton chemin',
   'p.battery': 'Un jeu d’horreur à la première personne dans le navigateur. Cinq niveaux, quatre fins et un téléphone à 5 % que chaque action vide. Géométrie, textures, photos, voix et musique sont générées procéduralement à l’exécution — aucun fichier d’asset.',
   'p.tracky': 'Appli iOS native de mesure de performance. Fusionne GPS, accéléromètre, gyroscope et baromètre pour chronométrer le 0–100, le quart de mille et les forces G, avec départ et arrivée détectés automatiquement.',
@@ -154,9 +150,7 @@ let scrollVel = 0, lastY = scrollY;
     col += hot * pow(f, 3.2) * .55;
     col += cool * pow(length(q), 6.) * .05;
     col += mix(cool, hot, f) * (1.-lines) * (.06 + .14*smoothstep(.6,0.,length(uv-mp)) + .08*v);
-    col *= 1. - .55*length(uv*vec2(.7,1.));
-    col *= mix(1., .5, smoothstep(0., r.y*1.2, s)); // calmer behind body text
-    gl_FragColor = vec4(col, 1.);
+    col *= 1. - .55*length(uv*vec2(.7,1.));    gl_FragColor = vec4(col, 1.);
   }`;
   const sh = (type, src) => { const x = g.createShader(type); g.shaderSource(x, src); g.compileShader(x); if (!g.getShaderParameter(x, g.COMPILE_STATUS)) console.warn(g.getShaderInfoLog(x)); return x; };
   const pr = g.createProgram();
@@ -395,7 +389,7 @@ const ACTIONS = [
   { t: 'Go to About', k: 'section', f: () => go('about') },
   { t: 'Go to Work', k: 'section', f: () => go('work') },
   { t: 'Go to Who am I', k: 'section', f: () => go('log') },
-  { t: 'Play the project maze', k: 'section', f: () => { go('work'); setTimeout(() => document.getElementById('maze-go')?.click(), 600); } },
+  { t: 'Fall down the rabbit hole (project reels)', k: 'section', f: () => { go('work'); setTimeout(() => document.getElementById('feed')?.focus({ preventScroll: true }), 600); } },
   { t: 'Go to Shell', k: 'section', f: () => { go('shell'); setTimeout(() => input.focus({ preventScroll: true }), 600); } },
   { t: 'Go to Contact', k: 'section', f: () => go('contact') },
   ...PROJECTS.map(p => ({ t: 'Open ' + p.name, k: 'project', f: () => window.open(p.url, '_blank', 'noopener') })),

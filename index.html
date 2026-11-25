@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="reels.css">
 </head>
 <body>
 
@@ -102,51 +103,49 @@
 <!-- ============ WORK ============ -->
 <section id="work" class="section">
   <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
-  <p class="sec-sub mono" data-i18n="work.sub">// my projects are parked somewhere in this maze. go find them.</p>
+  <div class="work-bar">
+    <p class="sec-sub mono" data-i18n="work.sub">// swipe up for the next project. tap the sides to go deeper.</p>
+    <div class="view-toggle mono" role="tablist">
+      <button class="on" data-view="reels" role="tab" aria-selected="true">▮ reels</button>
+      <button data-view="grid" role="tab" aria-selected="false">⊞ grid</button>
+    </div>
+  </div>
 
-  <div class="maze-wrap reveal">
-    <div class="maze-stage" id="maze-stage">
-      <canvas id="maze" tabindex="0" aria-label="Project maze. Use arrow keys or WASD to drive, or click a tile to drive there."></canvas>
+  <div class="reels" id="reels">
+    <!-- left: rabbit-hole meter -->
+    <aside class="hole">
+      <p class="mono hole-k" data-i18n="rh.depth">rabbit-hole depth</p>
+      <div class="hole-n"><b id="rh-seen">0</b><span>/<span id="rh-total">0</span></span></div>
+      <div class="hole-shaft" aria-hidden="true"><i id="rh-fill"></i></div>
+      <p class="mono hole-k" data-i18n="rh.time">time down here</p>
+      <div class="hole-t mono" id="rh-time">0:00</div>
+      <ul class="hole-badges mono" id="rh-badges"></ul>
+      <p class="mono hole-keys"><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="rh.k1">projects</span> · <kbd>←</kbd><kbd>→</kbd> <span data-i18n="rh.k2">deeper</span> · <kbd>L</kbd> <span data-i18n="rh.k3">like</span></p>
+    </aside>
 
-      <div class="maze-intro" id="maze-intro">
-        <p class="mono mi-pre" data-i18n="mz.pre">// choose your route</p>
-        <h3 data-i18n="mz.q">How do you want to see my work?</h3>
-        <div class="mi-choices">
-          <button class="mi-choice" id="maze-go">
-            <span class="mono">A</span>
-            <b data-i18n="mz.a">Take the back roads</b>
-            <small data-i18n="mz.a.d">Drive a maze in the dark. Each beacon unlocks a project. ~2 min.</small>
-          </button>
-          <button class="mi-choice" id="maze-skip">
-            <span class="mono">B</span>
-            <b data-i18n="mz.b">Take the highway</b>
-            <small data-i18n="mz.b.d">In a hurry? Unlock every project right now.</small>
-          </button>
-        </div>
+    <!-- center: the phone -->
+    <div class="reel-phone" id="reel-phone">
+      <div class="feed" id="feed" tabindex="0" aria-label="Project reels. Arrow keys: up and down for projects, left and right for slides."></div>
+      <div class="bars" id="bars" aria-hidden="true"></div>
+      <div class="reel-top mono" aria-hidden="true"><span class="rt-av">AY</span><b>aidin.yaseri</b><span id="rt-proj"></span><span class="rt-pause" id="rt-pause">❚❚</span></div>
+      <div class="rail" id="rail">
+        <button id="r-like" aria-label="Like"><span class="ri">♥</span><small id="r-like-n">0</small></button>
+        <button id="r-deeper" aria-label="Go deeper"><span class="ri">↳</span><small data-i18n="rh.deeper">deeper</small></button>
+        <a id="r-open" target="_blank" rel="noopener" aria-label="Open project"><span class="ri">↗</span><small data-i18n="rh.open">open</small></a>
+        <button id="r-share" aria-label="Copy link"><span class="ri">⧉</span><small data-i18n="rh.share">share</small></button>
       </div>
-
-      <div class="dpad" aria-hidden="true">
-        <button data-d="up">▲</button><button data-d="left">◀</button><button data-d="down">▼</button><button data-d="right">▶</button>
-      </div>
-      <div class="maze-toast mono" id="maze-toast" role="status"></div>
+      <div class="swipe-hint mono" id="swipe-hint" aria-hidden="true"><span>↑</span><b data-i18n="rh.hint">swipe up</b></div>
+      <div class="reel-toast mono" id="reel-toast" role="status"></div>
     </div>
 
-    <aside class="maze-panel">
-      <div class="mp-count"><b id="found-n">0</b><span>/<span id="found-total">8</span></span><small class="mono" data-i18n="mz.found">projects found</small></div>
-      <div class="mp-meter"><i id="found-bar"></i></div>
-      <div class="mp-card" id="mp-card">
-        <p class="mono mp-empty" data-i18n="mz.empty">Drive to an orange beacon to unlock a project. The green one is the exit.</p>
-      </div>
-      <p class="mono mp-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> <span data-i18n="mz.keys">or arrows · click any tile to auto-drive</span></p>
-      <div class="mp-actions mono">
-        <button id="maze-skip2" data-i18n="mz.skip">skip → unlock all</button>
-        <button id="maze-reset" data-i18n="mz.reset">new maze</button>
-      </div>
+    <!-- right: up next -->
+    <aside class="upnext">
+      <p class="mono hole-k" data-i18n="rh.next">up next</p>
+      <ol id="upnext"></ol>
     </aside>
   </div>
 
-  <h3 class="garage-head mono" data-i18n="mz.garage">// garage — unlocked projects</h3>
-  <div class="bento" id="garage">
+  <div class="bento" id="garage" hidden>
 
     <a class="card c-xl" href="https://github.com/AidinYaseri/The-Last-Battery-" target="_blank" rel="noopener" data-repo="The-Last-Battery-">
       <div class="card-art art-battery" aria-hidden="true">
@@ -314,6 +313,6 @@
 </dialog>
 
 <script src="main.js" type="module"></script>
-<script src="maze.js" type="module"></script>
+<script src="reels.js" type="module"></script>
 </body>
 </html>

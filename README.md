@@ -20,7 +20,7 @@ It goes live at https://aidinyaseri.github.io.
 - OBD-II handshake boot sequence (shown once per visit, any key skips it)
 - Scroll-linked tachometer (`@property` + CSS custom properties), redline past 78%
 - Text scramble on the name, scroll-driven `view()` reveal animations
-- Bento project cards with 3D tilt, pointer spotlight and a rotating conic border
+- Projects as a Reels/Stories-style feed (`reels.js`): swipe up for the next project, tap or swipe sideways for slides, autoplay, double-tap to like, a "rabbit-hole depth" meter with badges, and each project's last slide leads into related projects. A grid toggle shows the classic cards (3D tilt, pointer spotlight, rotating conic border). Slide text lives in the `P` array in `reels.js`
 - GitHub API live data: repo count and "last push" time on each card
 - Working terminal (`help`, `ls`, `open 1`, `repos`, `obd`, ...)
 - Ctrl/Cmd+K command palette with fuzzy search
