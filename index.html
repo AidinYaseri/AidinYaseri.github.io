@@ -80,7 +80,7 @@
 
 <!-- ============ ABOUT ============ -->
 <section id="about" class="section">
-  <h2 class="sec-head"><span class="mono">01</span><span data-i18n="about.title">whoami</span></h2>
+  <h2 class="sec-head"><span class="mono">01</span><span data-i18n="about.title">about</span></h2>
 
   <div class="about-grid">
     <p class="about-big reveal" data-i18n="about.big">I like taking an idea, hitting the hard technical wall, and getting past it until it's <em class="serif">actually useful</em>. Half my projects plug into a car.</p>
@@ -102,9 +102,51 @@
 <!-- ============ WORK ============ -->
 <section id="work" class="section">
   <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
-  <p class="sec-sub mono" data-i18n="work.sub">// hover the cards. click one to open the repo.</p>
+  <p class="sec-sub mono" data-i18n="work.sub">// my projects are parked somewhere in this maze. go find them.</p>
 
-  <div class="bento">
+  <div class="maze-wrap reveal">
+    <div class="maze-stage" id="maze-stage">
+      <canvas id="maze" tabindex="0" aria-label="Project maze. Use arrow keys or WASD to drive, or click a tile to drive there."></canvas>
+
+      <div class="maze-intro" id="maze-intro">
+        <p class="mono mi-pre" data-i18n="mz.pre">// choose your route</p>
+        <h3 data-i18n="mz.q">How do you want to see my work?</h3>
+        <div class="mi-choices">
+          <button class="mi-choice" id="maze-go">
+            <span class="mono">A</span>
+            <b data-i18n="mz.a">Take the back roads</b>
+            <small data-i18n="mz.a.d">Drive a maze in the dark. Each beacon unlocks a project. ~2 min.</small>
+          </button>
+          <button class="mi-choice" id="maze-skip">
+            <span class="mono">B</span>
+            <b data-i18n="mz.b">Take the highway</b>
+            <small data-i18n="mz.b.d">In a hurry? Unlock every project right now.</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="dpad" aria-hidden="true">
+        <button data-d="up">▲</button><button data-d="left">◀</button><button data-d="down">▼</button><button data-d="right">▶</button>
+      </div>
+      <div class="maze-toast mono" id="maze-toast" role="status"></div>
+    </div>
+
+    <aside class="maze-panel">
+      <div class="mp-count"><b id="found-n">0</b><span>/<span id="found-total">8</span></span><small class="mono" data-i18n="mz.found">projects found</small></div>
+      <div class="mp-meter"><i id="found-bar"></i></div>
+      <div class="mp-card" id="mp-card">
+        <p class="mono mp-empty" data-i18n="mz.empty">Drive to an orange beacon to unlock a project. The green one is the exit.</p>
+      </div>
+      <p class="mono mp-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> <span data-i18n="mz.keys">or arrows · click any tile to auto-drive</span></p>
+      <div class="mp-actions mono">
+        <button id="maze-skip2" data-i18n="mz.skip">skip → unlock all</button>
+        <button id="maze-reset" data-i18n="mz.reset">new maze</button>
+      </div>
+    </aside>
+  </div>
+
+  <h3 class="garage-head mono" data-i18n="mz.garage">// garage — unlocked projects</h3>
+  <div class="bento" id="garage">
 
     <a class="card c-xl" href="https://github.com/AidinYaseri/The-Last-Battery-" target="_blank" rel="noopener" data-repo="The-Last-Battery-">
       <div class="card-art art-battery" aria-hidden="true">
@@ -161,7 +203,7 @@
       </div>
     </a>
 
-    <div class="card">
+    <div class="card" data-repo="campus-parking">
       <div class="card-art art-park" aria-hidden="true"><i></i><i class="f"></i><i></i><i></i><i class="f"></i><i></i><i class="f"></i><i></i></div>
       <div class="card-body">
         <div class="card-top mono"><span data-i18n="p.park.tag">Hackathon · team of 4</span></div>
@@ -193,7 +235,7 @@
 
 <!-- ============ LOG ============ -->
 <section id="log" class="section">
-  <h2 class="sec-head"><span class="mono">03</span><span data-i18n="log.title">changelog</span></h2>
+  <h2 class="sec-head"><span class="mono">03</span><span data-i18n="log.title">who am I</span></h2>
 
   <ol class="timeline">
     <li class="reveal">
@@ -272,5 +314,6 @@
 </dialog>
 
 <script src="main.js" type="module"></script>
+<script src="maze.js" type="module"></script>
 </body>
 </html>
