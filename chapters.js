@@ -21,14 +21,13 @@ const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).
 const KEY = 'case-files-v1';
 const S = Object.assign({ explored: {}, secrets: {}, log: {} }, JSON.parse(localStorage.getItem(KEY) || '{}'));
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
-const startedAt = Date.now();
 
 /* =========================================================
    Chapters
    ========================================================= */
 const CH = [
   {
-    id: 'battery', n: '01', stack: 'Three.js · TypeScript · Vite', url: 'https://github.com/AidinYaseri/The-Last-Battery-', name: 'The Last Battery',
+    id: 'battery', related: ['tracky','fin'], n: '01', stack: 'Three.js · TypeScript · Vite', url: 'https://github.com/AidinYaseri/The-Last-Battery-', name: 'The Last Battery',
     q: { en: 'What would you spend your last 5% on?', fr: 'Que ferais-tu avec ton dernier 5 %?' },
     p: { en: 'In my browser horror game you’re lost in a forest at night, and every action on your phone costs battery. Try it: each app you tap reveals something about how the game was built. You won’t see everything before it dies.', fr: 'Dans mon jeu d’horreur web, tu es perdu en forêt la nuit et chaque action sur ton téléphone coûte de la batterie. Essaie : chaque appli révèle un détail sur la conception du jeu. Tu ne verras pas tout avant qu’il meure.' },
     secret: { en: 'Debug flags I left in: <code>?fps</code> shows a draw-call counter, <code>?debug&level=3</code> jumps to a level, <code>?nolock</code> disables pointer lock for automated tests.', fr: 'Des options de débogage laissées dedans : <code>?fps</code> affiche les draw calls, <code>?debug&level=3</code> saute à un niveau, <code>?nolock</code> désactive le verrouillage du pointeur pour les tests automatisés.' },
@@ -38,7 +37,7 @@ const CH = [
     demo: battery,
   },
   {
-    id: 'tracky', n: '02', stack: 'Swift · SwiftUI · Core Motion', url: 'https://github.com/AidinYaseri/TrackYourDrag', name: 'Tracky',
+    id: 'tracky', related: ['obd','battery'], n: '02', stack: 'Swift · SwiftUI · Core Motion', url: 'https://github.com/AidinYaseri/TrackYourDrag', name: 'Tracky',
     q: { en: 'How fast are your reflexes off the line?', fr: 'Tes réflexes au départ, ils valent combien?' },
     p: { en: 'Tracky is my iOS app that times real launches using GPS, accelerometer, gyroscope and barometer. It detects the launch by itself. Here you’re the launch detector: wait for green, then go.', fr: 'Tracky est mon appli iOS qui chronomètre de vrais départs avec GPS, accéléromètre, gyroscope et baromètre. Elle détecte le départ toute seule. Ici, c’est toi le détecteur : attends le vert, puis go.' },
     secret: { en: 'Any two saved runs can be compared with their speed curves overlaid, and every run keeps a GPS quality report so you know if the time is trustworthy.', fr: 'Deux courses peuvent être comparées avec leurs courbes de vitesse superposées, et chaque course garde un rapport de qualité GPS pour savoir si le temps est fiable.' },
@@ -48,7 +47,7 @@ const CH = [
     demo: tracky,
   },
   {
-    id: 'obd', n: '03', stack: 'Python · OBD-II', url: 'https://github.com/AidinYaseri/Obd_project', name: 'CarSync',
+    id: 'obd', related: ['tracky','adopt'], n: '03', stack: 'Python · OBD-II', url: 'https://github.com/AidinYaseri/Obd_project', name: 'CarSync',
     q: { en: 'What is your check-engine light hiding?', fr: 'Que cache ton voyant moteur?' },
     p: { en: 'CarSync plugs into a car’s OBD-II port, pulls the trouble codes from the engine computer and turns them into plain language. I tested it on real cars. Plug in below and read some codes.', fr: 'CarSync se branche au port OBD-II, lit les codes d’erreur de l’ordinateur du moteur et les traduit en langage clair. Testé sur de vraies voitures. Branche-toi et lis quelques codes.' },
     secret: { en: 'It ships as a standalone desktop app: the repo has a PyInstaller spec (<code>CarSync.spec</code>), so a mechanic doesn’t need Python installed.', fr: 'C’est une appli de bureau autonome : le dépôt a un fichier PyInstaller (<code>CarSync.spec</code>), donc un mécanicien n’a pas besoin d’installer Python.' },
@@ -58,7 +57,7 @@ const CH = [
     demo: obd,
   },
   {
-    id: 'adopt', n: '04', stack: '.NET 10 · Blazor · Keycloak · SQL Server', url: 'https://github.com/AidinYaseri/Team-5-Web-Programming', name: 'Animal Adoption',
+    id: 'adopt', related: ['fin','obd'], n: '04', stack: '.NET 10 · Blazor · Keycloak · SQL Server', url: 'https://github.com/AidinYaseri/Team-5-Web-Programming', name: 'Animal Adoption',
     q: { en: 'What happens in the 300 ms after you click “Adopt”?', fr: 'Que se passe-t-il dans les 300 ms après un clic sur « Adopter »?' },
     p: { en: 'A team project built like production: a Blazor client, an ASP.NET Core API, Keycloak sign-in and EF Core on SQL Server. Send a request and watch where it goes.', fr: 'Un projet d’équipe bâti comme en production : client Blazor, API ASP.NET Core, connexion Keycloak et EF Core sur SQL Server. Envoie une requête et regarde où elle passe.' },
     secret: { en: 'The client references none of the backend projects. The API resolves the token’s <code>sub</code> claim to <code>User.ExternalId</code>, so identity lives in Keycloak and data lives in SQL.', fr: 'Le client ne référence aucun projet backend. L’API associe le <code>sub</code> du jeton à <code>User.ExternalId</code> : l’identité vit dans Keycloak, les données dans SQL.' },
@@ -68,7 +67,7 @@ const CH = [
     demo: adopt,
   },
   {
-    id: 'fin', n: '05', stack: 'TypeScript · REST · Docker', url: 'https://github.com/AidinYaseri/Webll-Final-Finance-Tracker', name: { en: 'Finance Tracker', fr: 'Suivi financier' },
+    id: 'fin', related: ['adopt','side'], n: '05', stack: 'TypeScript · REST · Docker', url: 'https://github.com/AidinYaseri/Webll-Final-Finance-Tracker', name: { en: 'Finance Tracker', fr: 'Suivi financier' },
     q: { en: 'Where does a student’s money actually go?', fr: 'Où va vraiment l’argent d’un étudiant?' },
     p: { en: 'A full-stack tracker with accounts, categories and a dashboard, planned as user stories and an ER diagram first. Add a few transactions and see the API calls the real app makes.', fr: 'Un suivi full-stack avec comptes, catégories et tableau de bord, planifié d’abord en user stories et diagramme ER. Ajoute quelques transactions et vois les appels API de la vraie appli.' },
     secret: { en: 'Three tables do all the work: USERS has many TRANSACTIONS, CATEGORIES classify them. The whole thing runs in Docker.', fr: 'Trois tables font tout : USERS a plusieurs TRANSACTIONS, CATEGORIES les classe. Le tout roule dans Docker.' },
@@ -78,7 +77,7 @@ const CH = [
     demo: fin,
   },
   {
-    id: 'side', n: '06', stack: { en: 'side quests', fr: 'quêtes secondaires' }, url: null, name: { en: 'Side quests', fr: 'Quêtes secondaires' },
+    id: 'side', related: ['fin','battery'], n: '06', stack: { en: 'side quests', fr: 'quêtes secondaires' }, url: null, name: { en: 'Side quests', fr: 'Quêtes secondaires' },
     q: { en: 'Three smaller builds. Can you open all three?', fr: 'Trois petits projets. Peux-tu ouvrir les trois?' },
     p: { en: 'A hackathon parking map, a live soccer score site and a sales map. Flip each card.', fr: 'Une carte de stationnement de hackathon, un site de scores de soccer en direct et une carte de ventes. Retourne chaque carte.' },
     secret: { en: 'The Campus Parking app was reworked live at the hackathon from other students’ feedback, and Score Keeper was designed entirely in Figma before any code.', fr: 'L’appli de stationnement a été retravaillée sur place selon les commentaires d’autres étudiants, et Score Keeper a été entièrement conçu dans Figma avant le code.' },
@@ -90,74 +89,139 @@ const CH = [
 ];
 
 /* =========================================================
-   Shell: rail, chapter markup, secrets, debrief
+   Shell: rail, chapter, secrets, recommendations, debrief
    ========================================================= */
-const root = $('#chapters'), rail = $('#files-rail');
+const GLYPH = { battery: '5%', tracky: '0–100', obd: 'P0301', adopt: '201', fin: '$', side: '?' };
+const pageFor = id => `project.html?p=${id}`;
+const fr = () => lang() === 'fr';
 
 function chapterHTML(c) {
   const got = S.secrets[c.id];
-  return `<article class="chapter reveal" id="ch-${c.id}" data-ch="${c.id}">
+  const i = CH.indexOf(c), nx = CH[(i + 1) % CH.length];
+  return `<article class="chapter" id="ch-${c.id}" data-ch="${c.id}">
     <div class="ch-story">
       <p class="mono ch-n"><span>case ${c.n}</span> ${L(c.stack)}</p>
       <h3 class="ch-q">${L(c.q)}</h3>
       <p class="ch-p">${L(c.p)}</p>
       <div class="secret ${got ? 'open' : ''}" data-secret="${c.id}">
-        <p class="mono secret-k">${got ? '🔓 ' + (lang() === 'fr' ? 'secret débloqué' : 'secret unlocked') : '🔒 ' + (lang() === 'fr' ? 'secret verrouillé · ' : 'locked secret · ') + L(c.lock)}</p>
+        <p class="mono secret-k">${got ? '🔓 ' + (fr() ? 'secret débloqué' : 'secret unlocked') : '🔒 ' + (fr() ? 'secret verrouillé · ' : 'locked secret · ') + L(c.lock)}</p>
         <p class="secret-v">${got ? L(c.secret) : '████ ██████ ███ █████████ ██ ████ ███████ ██ ███ ████████ ███'}</p>
       </div>
-      <p class="mono ch-links">${c.url ? `<a href="${c.url}" target="_blank" rel="noopener">${L(c.name)} ↗</a>` : ''}</p>
+      <p class="mono ch-links">${c.url ? `<a href="${c.url}" target="_blank" rel="noopener">${fr() ? 'code source' : 'source code'} ↗</a>` : ''}</p>
     </div>
     <div class="ch-demo" data-demo="${c.id}"></div>
-    ${c.next ? `<p class="mono ch-next" data-i="${CH.indexOf(c)}"><span>${L(c.next)}</span> <b>↓</b></p>` : ''}
+    ${c.next ? `<a class="mono ch-next" href="${pageFor(nx.id)}"><span>${L(c.next)}</span> <b>→</b></a>` : ''}
   </article>`;
 }
 
+function status(c) {
+  if (S.secrets[c.id]) return `<span class="st sec">🔓 ${fr() ? 'secret trouvé' : 'secret found'}</span>`;
+  if (S.explored[c.id]) return `<span class="st done">✓ ${fr() ? 'exploré' : 'explored'}</span>`;
+  return `<span class="st new">${fr() ? 'nouveau' : 'new'}</span>`;
+}
+function thumb(c, extra = '') {
+  return `<a class="rec ${extra}" href="${pageFor(c.id)}" data-id="${c.id}">
+    <span class="rec-art rec-${c.id}"><b class="mono">${GLYPH[c.id]}</b></span>
+    <span class="rec-body">
+      <small class="mono">case ${c.n} · ${L(c.stack)}</small>
+      <b>${L(c.name)}</b>
+      <span class="rec-q">${L(c.q)}</span>
+      <span class="rec-foot mono">${status(c)}<span class="rec-t">~${c.id === 'side' ? 1 : 2} min</span></span>
+    </span>
+  </a>`;
+}
+
+// Amazon-style blocks under a project
+function recsHTML(cur) {
+  const c = CH.find(x => x.id === cur);
+  const related = (c?.related || []).map(id => CH.find(x => x.id === id)).filter(Boolean);
+  const others = CH.filter(x => x.id !== cur);
+  const hist = (S.history || []).filter(id => id !== cur).map(id => CH.find(x => x.id === id)).filter(Boolean).slice(0, 6);
+  const bundle = c ? [c, ...related] : [];
+  const firstTodo = bundle.find(x => x.id !== cur && !S.secrets[x.id]);
+  const allDone = bundle.every(x => S.secrets[x.id]);
+  return `
+    ${bundle.length ? `<div class="recs-block">
+      <h3 class="recs-h">${fr() ? 'À explorer ensemble' : 'Explore these together'}</h3>
+      <div class="bundle">
+        ${bundle.map((x, i) => `${i ? '<span class="plus">+</span>' : ''}<a class="bundle-item ${x.id === cur ? 'this' : ''}" href="${pageFor(x.id)}"><span class="rec-art rec-${x.id}"><b class="mono">${GLYPH[x.id]}</b></span><small class="mono">${x.id === cur ? (fr() ? 'ce projet' : 'this project') : 'case ' + x.n}</small><b>${L(x.name)}</b></a>`).join('')}
+        <div class="bundle-total">
+          <p class="mono">${bundle.filter(x => S.secrets[x.id]).length}/${bundle.length} ${fr() ? 'secrets trouvés' : 'secrets found'}</p>
+          <p class="bundle-price">~${bundle.length * 2} min</p>
+          ${allDone ? `<span class="bundle-go done mono">${fr() ? 'ensemble complété ✓' : 'set complete ✓'}</span>`
+            : firstTodo ? `<a class="bundle-go mono" href="${pageFor(firstTodo.id)}">${fr() ? 'Continuer avec' : 'Continue with'} ${L(firstTodo.name)} →</a>`
+            : `<a class="bundle-go mono" href="#ch-${cur}">${fr() ? 'Finis celui-ci d’abord ↑' : 'Finish this one first ↑'}</a>`}
+        </div>
+      </div>
+    </div>` : ''}
+    <div class="recs-block">
+      <h3 class="recs-h">${c ? (fr() ? 'Si tu as aimé ce projet, essaie aussi' : 'If you liked this, you’ll also like') : (fr() ? 'Tous les dossiers' : 'All case files')}</h3>
+      <div class="carousel"><button class="car-btn prev mono" aria-label="previous">‹</button><div class="car-track">${(c ? others.sort((a, b) => (related.includes(b) - related.includes(a)) || (!!S.explored[a.id] - !!S.explored[b.id])) : CH).map(x => thumb(x)).join('')}</div><button class="car-btn next mono" aria-label="next">›</button></div>
+    </div>
+    ${hist.length ? `<div class="recs-block">
+      <h3 class="recs-h">${fr() ? 'Ton historique' : 'Your browsing history'}</h3>
+      <div class="hist">${hist.map(x => `<a href="${pageFor(x.id)}" class="hist-i"><span class="rec-art rec-${x.id}"><b class="mono">${GLYPH[x.id]}</b></span><small>${L(x.name)}</small></a>`).join('')}</div>
+    </div>` : ''}`;
+}
+
 function debriefHTML() {
-  const fr = lang() === 'fr';
   const done = CH.filter(c => S.explored[c.id]);
   const secrets = CH.filter(c => S.secrets[c.id]).length;
-  const mins = Math.max(1, Math.round((Date.now() - startedAt) / 60000));
-  const list = done.length ? done.map(c => `<li>✓ ${fr ? 'Tu as' : 'You'} ${L(c.did)}</li>`).join('') : `<li>${fr ? 'Rien encore… remonte et joue un peu.' : 'Nothing yet… scroll up and play a little.'}</li>`;
+  const list = done.map(c => `<li>✓ ${fr() ? 'Tu as' : 'You'} ${L(c.did)}</li>`).join('');
   const missing = CH.filter(c => !S.secrets[c.id]);
-  return `<div class="debrief reveal" id="debrief">
-    <p class="mono ch-n"><span>debrief</span></p>
+  return `<div class="debrief" id="debrief">
+    <p class="mono ch-n"><span>${fr() ? 'ton parcours' : 'your progress'}</span></p>
     <h3 class="ch-q">${done.length === CH.length
-      ? (fr ? 'Tu as essayé tout ce que j’ai bâti.' : 'You’ve tried everything I’ve built.')
-      : (fr ? `Tu en es à ${done.length} sur ${CH.length}.` : `You’re ${done.length} of ${CH.length} in.`)}</h3>
-    <ul class="mono db-list">${list}</ul>
-    <p class="db-stat mono">${secrets}/${CH.length} ${fr ? 'secrets' : 'secrets'} · ~${mins} min ${fr ? 'ici' : 'here'}</p>
-    ${missing.length && missing.length < CH.length ? `<p class="db-miss mono">${fr ? 'Encore verrouillés :' : 'Still locked:'} ${missing.map(c => `<a href="#ch-${c.id}">${L(c.name)}</a>`).join(' · ')}</p>` : ''}
-    <p class="ch-p">${fr ? 'Imagine ce que je ferais avec un vrai problème de ton équipe.' : 'Imagine what I’d build with a real problem from your team.'}</p>
-    <a class="db-cta" href="mailto:aidiny2000@gmail.com">${fr ? 'Parlons stage →' : 'Let’s talk internship →'}</a>
+      ? (fr() ? 'Tu as essayé tout ce que j’ai bâti.' : 'You’ve tried everything I’ve built.')
+      : (fr() ? `${done.length} dossier${done.length > 1 ? 's' : ''} sur ${CH.length} ouvert${done.length > 1 ? 's' : ''}.` : `${done.length} of ${CH.length} case files opened.`)}</h3>
+    ${list ? `<ul class="mono db-list">${list}</ul>` : ''}
+    <p class="db-stat mono">${secrets}/${CH.length} secrets</p>
+    ${missing.length ? `<p class="db-miss mono">${fr() ? 'Encore verrouillés :' : 'Still locked:'} ${missing.map(c => `<a href="${pageFor(c.id)}">${L(c.name)}</a>`).join(' · ')}</p>` : ''}
+    <p class="ch-p">${fr() ? 'Imagine ce que je ferais avec un vrai problème de ton équipe.' : 'Imagine what I’d build with a real problem from your team.'}</p>
+    <a class="db-cta" href="mailto:aidiny2000@gmail.com">${fr() ? 'Parlons stage →' : 'Let’s talk internship →'}</a>
   </div>`;
 }
 
 function railHTML() {
-  const fr = lang() === 'fr';
   const n = CH.filter(c => S.explored[c.id]).length, sec = CH.filter(c => S.secrets[c.id]).length;
   const pct = Math.round((1 + n + sec) / (1 + CH.length * 2) * 100); // endowed: "intro" counts as done
-  const msg = pct >= 100 ? (fr ? 'tout débloqué 🏁' : 'everything unlocked 🏁')
-    : pct >= 75 ? (fr ? 'presque fini…' : 'almost there…')
-    : n === 0 ? (fr ? 'commence par jouer avec un projet' : 'start by playing with one')
-    : `${CH.length * 2 - n - sec} ${fr ? 'choses encore cachées' : 'things still hidden'}`;
+  const msg = pct >= 100 ? (fr() ? 'tout débloqué 🏁' : 'everything unlocked 🏁')
+    : pct >= 75 ? (fr() ? 'presque fini…' : 'almost there…')
+    : n === 0 ? (fr() ? 'commence par jouer avec un projet' : 'start by playing with one')
+    : `${CH.length * 2 - n - sec} ${fr() ? 'choses encore cachées' : 'things still hidden'}`;
   return `<div class="fr-bar"><i style="width:${pct}%"></i></div>
     <div class="fr-row mono">
       <span class="fr-chip done">intro ✓</span>
-      ${CH.map(c => `<a class="fr-chip ${S.explored[c.id] ? 'done' : ''} ${S.secrets[c.id] ? 'sec' : ''}" href="#ch-${c.id}">${c.n} ${L(c.name)}${S.secrets[c.id] ? ' 🔓' : S.explored[c.id] ? ' ✓' : ''}</a>`).join('')}
+      ${CH.map(c => `<a class="fr-chip ${S.explored[c.id] ? 'done' : ''} ${S.secrets[c.id] ? 'sec' : ''} ${c.id === mounted.id ? 'cur' : ''}" href="${pageFor(c.id)}">${c.n} ${L(c.name)}${S.secrets[c.id] ? ' 🔓' : S.explored[c.id] ? ' ✓' : ''}</a>`).join('')}
       <span class="fr-msg">${pct}% · ${msg}</span>
     </div>`;
 }
 
-function renderAll() {
-  root.innerHTML = CH.map(chapterHTML).join('') + debriefHTML();
-  CH.forEach(c => c.demo($(`[data-demo="${c.id}"]`), c));
-  rail.innerHTML = railHTML();
-  $$('.ch-next').forEach(el => el.addEventListener('click', () => $(`#ch-${CH[+el.dataset.i + 1].id}`).scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })));
+/* mount: render one chapter (or none) plus whichever surrounding blocks the page has */
+const mounted = { id: null, els: {} };
+export function mount({ id = null, chapter, rail, recs, debrief } = {}) {
+  mounted.id = id; mounted.els = { chapter, rail, recs, debrief };
+  if (id) { S.history = [id, ...(S.history || []).filter(x => x !== id)].slice(0, 10); save(); }
+  draw();
+}
+function draw() {
+  const { chapter, rail, recs, debrief } = mounted.els;
+  const c = CH.find(x => x.id === mounted.id);
+  if (chapter && c) { chapter.innerHTML = chapterHTML(c); c.demo($(`[data-demo="${c.id}"]`, chapter), c); }
+  refreshChrome();
 }
 function refreshChrome() {
-  rail.innerHTML = railHTML();
-  $('#debrief').outerHTML = debriefHTML();
-  $('#debrief').classList.add('in');
+  const { rail, recs, debrief } = mounted.els;
+  if (rail) rail.innerHTML = railHTML();
+  if (recs) { recs.innerHTML = recsHTML(mounted.id); wireCarousels(recs); }
+  if (debrief) debrief.innerHTML = debriefHTML();
+}
+function wireCarousels(root) {
+  $$('.carousel', root).forEach(car => {
+    const tr = $('.car-track', car);
+    $('.prev', car).onclick = () => tr.scrollBy({ left: -tr.clientWidth * .8, behavior: 'smooth' });
+    $('.next', car).onclick = () => tr.scrollBy({ left: tr.clientWidth * .8, behavior: 'smooth' });
+  });
 }
 function explored(id) {
   if (S.explored[id]) return;
@@ -168,21 +232,22 @@ function unlockSecret(id) {
   S.secrets[id] = true; S.explored[id] = true; save();
   const c = CH.find(x => x.id === id);
   const box = $(`[data-secret="${id}"]`);
-  box.classList.add('open', 'just');
-  box.querySelector('.secret-k').textContent = '🔓 ' + (lang() === 'fr' ? 'secret débloqué' : 'secret unlocked');
-  // "decrypt" the redacted text
-  const target = L(c.secret), v = box.querySelector('.secret-v');
-  if (reduced) v.innerHTML = target;
-  else {
-    const plain = target.replace(/<[^>]+>/g, ''); let i = 0;
-    const iv = setInterval(() => {
-      i += Math.ceil(plain.length / 30);
-      v.textContent = plain.slice(0, i) + plain.slice(i).replace(/\S/g, '█');
-      if (i >= plain.length) { clearInterval(iv); v.innerHTML = target; }
-    }, 30);
+  if (box) {
+    box.classList.add('open', 'just');
+    box.querySelector('.secret-k').textContent = '🔓 ' + (fr() ? 'secret débloqué' : 'secret unlocked');
+    const target = L(c.secret), v = box.querySelector('.secret-v');
+    if (reduced) v.innerHTML = target;
+    else {
+      const plain = target.replace(/<[^>]+>/g, ''); let i = 0;
+      const iv = setInterval(() => {
+        i += Math.ceil(plain.length / 30);
+        v.textContent = plain.slice(0, i) + plain.slice(i).replace(/\S/g, '█');
+        if (i >= plain.length) { clearInterval(iv); v.innerHTML = target; }
+      }, 30);
+    }
   }
   refreshChrome();
-  toast(lang() === 'fr' ? `🔓 secret débloqué : ${L(c.name)}` : `🔓 secret unlocked: ${L(c.name)}`);
+  toast(fr() ? `🔓 secret débloqué : ${L(c.name)}` : `🔓 secret unlocked: ${L(c.name)}`);
 }
 let toastT;
 function toast(msg) {
@@ -190,6 +255,9 @@ function toast(msg) {
   if (!t) { t = document.createElement('div'); t.id = 'cf-toast'; t.className = 'cf-toast mono'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
   t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2600);
 }
+export const chapters = CH;
+// re-render text on language switch; demo state lives in S so nothing is lost
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
 /* =========================================================
    Demo 1 — The Last Battery: spend 5% to reveal facts
@@ -431,13 +499,3 @@ function side(el) {
   });
 }
 
-/* =========================================================
-   Boot
-   ========================================================= */
-renderAll();
-// re-render text on language switch; demo state lives in S so nothing is lost
-new MutationObserver(() => { renderAll(); $$('#chapters .reveal').forEach(x => x.classList.add('in')); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .15 });
-$$('#chapters .reveal').forEach(x => io.observe(x));
-// keep the rail's elapsed-time-sensitive debrief fresh
-setInterval(() => { if ($('#debrief')) refreshChrome(); }, 60000);

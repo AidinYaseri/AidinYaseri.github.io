@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Aidin Yaseri</title>
+<meta name="description" content="Playable case files of Aidin Yaseri's projects: a browser horror game, an iOS performance tracker, an OBD-II diagnostic tool and more.">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2307080a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23ff5a1f' text-anchor='middle'%3EAY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="chapters.css">
+</head>
+<body class="project-page">
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"><span></span></div>
+
+<header class="hud">
+  <a href="index.html" class="hud-logo" aria-label="Home">AY<span>_</span></a>
+  <nav class="hud-nav" aria-label="Pages">
+    <a href="index.html"><span>←</span><i data-t="home">home</i></a>
+    <a href="project.html" id="nav-all"><span>⊞</span><i data-t="all">all case files</i></a>
+    <a href="index.html#contact"><span>@</span><i data-t="contact">contact</i></a>
+  </nav>
+  <div class="hud-right"><button class="chip" id="lang" aria-label="Switch language">EN<b>/</b>FR</button></div>
+</header>
+
+<main class="section proj-main">
+  <nav class="crumbs mono" id="crumbs"></nav>
+  <div class="files-rail" id="files-rail" aria-label="Exploration progress"></div>
+  <div id="chapter"></div>
+  <div id="recs"></div>
+  <div id="debrief-slot"></div>
+  <footer class="mono"><span>© <span id="year">2026</span> Aidin Yaseri</span><a href="index.html">← aidinyaseri.github.io</a></footer>
+</main>
+
+<script type="module" src="project.js"></script>
+</body>
+</html>

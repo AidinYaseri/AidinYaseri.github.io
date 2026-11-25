@@ -19,7 +19,7 @@ const FR = {
   'about.p2': 'À côté, j’ai fondé <strong>Apex Esthétique Auto</strong>, une entreprise mobile de détaillage automobile. Tarifs, rendez-vous, facturation, image de marque, site web et publicités : tout passe par moi — de vraies échéances, de vrais clients.',
   'stat.repos': 'dépôts publics', 'stat.clients': 'clients réguliers, an 1', 'stat.langs': 'langues, couramment', 'stat.assets': 'fichiers d’asset dans mon jeu 3D',
   'work.title': 'projets choisis', 'work.sub': '// ne lis pas mes projets. joue avec.',
-  'work.glance': 'pressé? tous les projets d’un coup d’œil ↓',
+  'work.feat': '// dossier vedette · 1 de 6', 'work.all': 'voir les 6 dossiers →',
   'p.battery.tag': 'retrouve ton chemin',
   'p.battery': 'Un jeu d’horreur à la première personne dans le navigateur. Cinq niveaux, quatre fins et un téléphone à 5 % que chaque action vide. Géométrie, textures, photos, voix et musique sont générées procéduralement à l’exécution — aucun fichier d’asset.',
   'p.tracky': 'Appli iOS native de mesure de performance. Fusionne GPS, accéléromètre, gyroscope et baromètre pour chronométrer le 0–100, le quart de mille et les forces G, avec départ et arrivée détectés automatiquement.',
@@ -117,81 +117,7 @@ function scramble(el, text = el.dataset.text || el.textContent) {
 }
 $$('.hero .scramble').forEach(s => s.addEventListener('pointerenter', () => scramble(s)));
 
-/* =========================================================
-   WebGL background: domain-warped fbm, reacts to pointer + scroll velocity
-   ========================================================= */
-const pointer = { x: .5, y: .5, tx: .5, ty: .5 };
-let scrollVel = 0, lastY = scrollY;
-(function gl() {
-  const c = $('#gl');
-  const g = c.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
-  if (!g) { c.style.background = 'radial-gradient(circle at 70% 30%, #1a0d07, #07080a 60%)'; return; }
-  const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
-  const fs = `
-  precision highp float;
-  uniform vec2 r; uniform float t; uniform vec2 m; uniform float s; uniform float v; uniform float red;
-  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
-  float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
-    return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
-  float fbm(vec2 p){ float a=.5, o=0.; mat2 R=mat2(.8,.6,-.6,.8); for(int i=0;i<5;i++){ o+=a*n(p); p=R*p*2.02; a*=.5; } return o; }
-  void main(){
-    vec2 uv = (gl_FragCoord.xy - .5*r) / r.y;
-    vec2 mp = (m - .5) * vec2(r.x/r.y, 1.);
-    float tt = t*.045 + s*.00025;
-    vec2 q = vec2(fbm(uv*1.6 + tt), fbm(uv*1.6 + vec2(5.2,1.3) - tt));
-    vec2 w = vec2(fbm(uv*1.6 + 3.*q + vec2(1.7,9.2) + .15*t*.1), fbm(uv*1.6 + 3.*q + vec2(8.3,2.8)));
-    float f = fbm(uv*1.6 + 3.5*w + .4*(mp-uv)*exp(-2.*length(uv-mp)));
-    // contour lines — like a topo map / heat trace
-    float lines = smoothstep(.0, .06, abs(fract(f*7.) - .5) - .38 + .05*v);
-    vec3 hot = mix(vec3(1.,.35,.12), vec3(1.,.12,.24), red);
-    vec3 cool = mix(vec3(.37,.9,1.), vec3(1.,.6,.12), red);
-    vec3 col = vec3(.027,.031,.039);
-    col += hot * pow(f, 3.2) * .55;
-    col += cool * pow(length(q), 6.) * .05;
-    col += mix(cool, hot, f) * (1.-lines) * (.06 + .14*smoothstep(.6,0.,length(uv-mp)) + .08*v);
-    col *= 1. - .55*length(uv*vec2(.7,1.));    gl_FragColor = vec4(col, 1.);
-  }`;
-  const sh = (type, src) => { const x = g.createShader(type); g.shaderSource(x, src); g.compileShader(x); if (!g.getShaderParameter(x, g.COMPILE_STATUS)) console.warn(g.getShaderInfoLog(x)); return x; };
-  const pr = g.createProgram();
-  g.attachShader(pr, sh(g.VERTEX_SHADER, vs)); g.attachShader(pr, sh(g.FRAGMENT_SHADER, fs));
-  g.linkProgram(pr); g.useProgram(pr);
-  g.bindBuffer(g.ARRAY_BUFFER, g.createBuffer());
-  g.bufferData(g.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), g.STATIC_DRAW);
-  const loc = g.getAttribLocation(pr, 'p'); g.enableVertexAttribArray(loc); g.vertexAttribPointer(loc, 2, g.FLOAT, false, 0, 0);
-  const U = n => g.getUniformLocation(pr, n);
-  const ur = U('r'), ut = U('t'), um = U('m'), us = U('s'), uv = U('v'), ured = U('red');
-  const DPR = Math.min(devicePixelRatio, 1.5) * .6; // render under-res; the blur is part of the look
-  const resize = () => { c.width = innerWidth * DPR; c.height = innerHeight * DPR; g.viewport(0, 0, c.width, c.height); };
-  resize(); addEventListener('resize', resize);
-  let redMix = 0, visible = true;
-  document.addEventListener('visibilitychange', () => { visible = !document.hidden; if (visible) requestAnimationFrame(loop); });
-  const t0 = performance.now();
-  function loop(now) {
-    pointer.x += (pointer.tx - pointer.x) * .05; pointer.y += (pointer.ty - pointer.y) * .05;
-    redMix += ((document.body.classList.contains('redline') ? 1 : 0) - redMix) * .05;
-    g.uniform2f(ur, c.width, c.height);
-    g.uniform1f(ut, reduced ? 10 : (now - t0) / 1000);
-    g.uniform2f(um, pointer.x, 1 - pointer.y);
-    g.uniform1f(us, scrollY); g.uniform1f(uv, Math.min(scrollVel, 1)); g.uniform1f(ured, redMix);
-    g.drawArrays(g.TRIANGLES, 0, 3);
-    if (visible && !reduced) requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
-})();
-
-/* =========================================================
-   Cursor
-   ========================================================= */
-const cur = $('#cursor');
-let cx = innerWidth / 2, cy = innerHeight / 2, kx = cx, ky = cy;
-addEventListener('pointermove', e => {
-  cx = e.clientX; cy = e.clientY;
-  pointer.tx = cx / innerWidth; pointer.ty = cy / innerHeight;
-});
-if (finePointer) {
-  (function follow() { kx += (cx - kx) * .22; ky += (cy - ky) * .22; cur.style.transform = `translate(${kx}px,${ky}px)`; requestAnimationFrame(follow); })();
-  document.addEventListener('pointerover', e => cur.classList.toggle('big', !!e.target.closest('a, button, .contact-big')));
-}
+import './bg.js';
 
 /* =========================================================
    Scroll: tachometer, velocity, active nav
@@ -214,11 +140,8 @@ function onScroll() {
   document.documentElement.style.setProperty('--p', p.toFixed(4));
   rpm.textContent = (0.85 + p * 7.15).toFixed(1);
   tach.classList.toggle('redline', p > .78);
-  scrollVel = Math.min(1, scrollVel + Math.abs(scrollY - lastY) / 600);
-  lastY = scrollY;
 }
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
-(function decay() { scrollVel *= .94; requestAnimationFrame(decay); })();
 
 const navLinks = $$('.hud-nav a');
 const navIO = new IntersectionObserver(es => es.forEach(e => {
@@ -264,14 +187,6 @@ if (finePointer && !reduced) $$('.card').forEach(card => {
   card.addEventListener('pointerleave', () => { card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg'); });
 });
 
-// Tracky: fake run that re-times on hover
-const trackyT = $('#tracky-t');
-$('[data-repo="TrackYourDrag"]').addEventListener('pointerenter', () => {
-  if (reduced) return;
-  const target = (4.4 + Math.random() * .8), t0 = performance.now();
-  const step = now => { const k = Math.min(1, (now - t0) / 1600); trackyT.textContent = (target * k).toFixed(2); if (k < 1) requestAnimationFrame(step); };
-  requestAnimationFrame(step);
-});
 
 /* =========================================================
    GitHub: language bars + live "last push" times
@@ -389,6 +304,7 @@ const ACTIONS = [
   { t: 'Go to Work', k: 'section', f: () => go('work') },
   { t: 'Go to Who am I', k: 'section', f: () => go('log') },
   { t: 'Play with the projects', k: 'section', f: () => go('work') },
+  { t: 'All case files (project page)', k: 'page', f: () => { location.href = 'project.html'; } },
   { t: 'Go to Shell', k: 'section', f: () => { go('shell'); setTimeout(() => input.focus({ preventScroll: true }), 600); } },
   { t: 'Go to Contact', k: 'section', f: () => go('contact') },
   ...PROJECTS.map(p => ({ t: 'Open ' + p.name, k: 'project', f: () => window.open(p.url, '_blank', 'noopener') })),

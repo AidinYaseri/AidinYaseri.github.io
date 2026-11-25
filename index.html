@@ -105,99 +105,11 @@
   <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
   <p class="sec-sub mono" data-i18n="work.sub">// don't read about my projects. play with them.</p>
 
-  <!-- sticky progress: what's explored, what's still hidden -->
   <div class="files-rail" id="files-rail" aria-label="Exploration progress"></div>
-
-  <div id="chapters"></div>
-
-  <details class="glance">
-    <summary class="mono" data-i18n="work.glance">in a hurry? all projects at a glance ↓</summary>
-  <div class="bento" id="garage">
-
-    <a class="card c-xl" href="https://github.com/AidinYaseri/The-Last-Battery-" target="_blank" rel="noopener" data-repo="The-Last-Battery-">
-      <div class="card-art art-battery" aria-hidden="true">
-        <div class="phone"><div class="phone-bat"><span></span></div><b>5%</b><small data-i18n="p.battery.tag">find your way home</small></div>
-      </div>
-      <div class="card-body">
-        <div class="card-top mono"><span>Three.js · TypeScript · Vite</span><span class="updated"></span></div>
-        <h3>The Last Battery</h3>
-        <p data-i18n="p.battery">A first-person horror game in the browser. Five levels, four endings, and a phone at 5% that every action drains. Geometry, textures, photos, voices and music are all generated procedurally at runtime — the game ships with no asset files.</p>
-        <div class="langbar" data-langs='{"TypeScript":472914,"CSS":30853,"HTML":1155}'></div>
-      </div>
-    </a>
-
-    <a class="card c-tall" href="https://github.com/AidinYaseri/TrackYourDrag" target="_blank" rel="noopener" data-repo="TrackYourDrag">
-      <div class="card-art art-tracky" aria-hidden="true">
-        <div class="gauge-read mono"><b id="tracky-t">4.82</b><small>s · 0–100 km/h</small></div>
-        <svg viewBox="0 0 200 90" class="speedline"><path d="M0 88 C 40 86, 60 60, 90 40 S 150 12, 200 8"/></svg>
-      </div>
-      <div class="card-body">
-        <div class="card-top mono"><span>Swift · SwiftUI · Core Motion</span><span class="updated"></span></div>
-        <h3>Tracky</h3>
-        <p data-i18n="p.tracky">Native iOS performance tracker. Fuses GPS, accelerometer, gyroscope and barometer to time 0–100, quarter miles and G-force, with auto-detected launch and finish.</p>
-        <div class="langbar" data-langs='{"Swift":446550,"Python":10550}'></div>
-      </div>
-    </a>
-
-    <a class="card c-wide" href="https://github.com/AidinYaseri/Team-5-Web-Programming" target="_blank" rel="noopener" data-repo="Team-5-Web-Programming">
-      <div class="card-art art-arch mono" aria-hidden="true">
-        <span>Blazor</span><i></i><span>API</span><i></i><span>Domain</span><i></i><span>EF Core</span><i></i><span>SQL</span>
-      </div>
-      <div class="card-body">
-        <div class="card-top mono"><span>.NET 10 · Blazor · Keycloak</span><span class="updated"></span></div>
-        <h3>Animal Adoption</h3>
-        <p data-i18n="p.adopt">Team build with a layered ASP.NET Core API, Blazor Server client, OIDC sign-in with PKCE, EF Core on SQL Server and xUnit integration tests.</p>
-        <div class="langbar" data-langs='{"C#":451674,"HTML":49011,"CSS":11784,"JavaScript":2385}'></div>
-      </div>
-    </a>
-
-    <a class="card" href="https://github.com/AidinYaseri/Obd_project" target="_blank" rel="noopener" data-repo="Obd_project">
-      <div class="card-art art-obd mono" aria-hidden="true"><span>P0301</span><span>P0171</span><span class="ok">P0000</span></div>
-      <div class="card-body">
-        <div class="card-top mono"><span>Python · OBD-II</span><span class="updated"></span></div>
-        <h3>CarSync</h3>
-        <p data-i18n="p.obd">Plugs into a car, pulls trouble codes from the engine computer and turns raw data into plain answers. Tested on real cars, not just in class.</p>
-      </div>
-    </a>
-
-    <a class="card" href="https://github.com/AidinYaseri/Webll-Final-Finance-Tracker" target="_blank" rel="noopener" data-repo="Webll-Final-Finance-Tracker">
-      <div class="card-art art-fin" aria-hidden="true"><i style="--h:40%"></i><i style="--h:65%"></i><i style="--h:30%"></i><i style="--h:80%"></i><i style="--h:55%"></i><i style="--h:90%"></i></div>
-      <div class="card-body">
-        <div class="card-top mono"><span>TypeScript · Docker</span><span class="updated"></span></div>
-        <h3 data-i18n="p.fin.t">Finance Tracker</h3>
-        <p data-i18n="p.fin">Full-stack income and expense tracker with auth, categories, a REST API and a dashboard. Containerised.</p>
-      </div>
-    </a>
-
-    <div class="card" data-repo="campus-parking">
-      <div class="card-art art-park" aria-hidden="true"><i></i><i class="f"></i><i></i><i></i><i class="f"></i><i></i><i class="f"></i><i></i></div>
-      <div class="card-body">
-        <div class="card-top mono"><span data-i18n="p.park.tag">Hackathon · team of 4</span></div>
-        <h3 data-i18n="p.park.t">Campus Parking</h3>
-        <p data-i18n="p.park">Real-time map of free spots on campus. I did the location tracking and phone UI, then reworked it on feedback from other students at the event.</p>
-      </div>
-    </div>
-
-    <a class="card" href="https://aidinyaseri.github.io/Soccer-Score-keeper/" target="_blank" rel="noopener" data-repo="Soccer-Score-keeper">
-      <div class="card-art art-score mono" aria-hidden="true"><b>2</b><span>:</span><b>1</b></div>
-      <div class="card-body">
-        <div class="card-top mono"><span>JavaScript · API-Football</span><span class="live">live ↗</span></div>
-        <h3>Score Keeper</h3>
-        <p data-i18n="p.score">Live and past soccer scores browsable from a calendar, fed by a sports API. Designed in Figma first.</p>
-      </div>
-    </a>
-
-    <a class="card c-full" href="https://github.com/AidinYaseri/Sales_map_WPA" target="_blank" rel="noopener" data-repo="Sales_map_WPA">
-      <div class="card-art art-map" aria-hidden="true"><i style="--x:20%;--y:30%"></i><i style="--x:62%;--y:52%"></i><i style="--x:40%;--y:72%"></i><i style="--x:78%;--y:24%"></i></div>
-      <div class="card-body">
-        <div class="card-top mono"><span>JavaScript · Vite</span><span class="updated"></span></div>
-        <h3>Sales Map</h3>
-        <p data-i18n="p.map">A map-based web app for plotting and tracking sales territory.</p>
-      </div>
-    </a>
-
-  </div>
-  </details>
+  <p class="mono featured-k" data-i18n="work.feat">// featured case file · 1 of 6</p>
+  <div id="featured"></div>
+  <div id="home-recs" class="home-recs"></div>
+  <a class="mono all-link" href="project.html" data-i18n="work.all">browse all 6 case files →</a>
 </section>
 
 <!-- ============ LOG ============ -->
@@ -281,6 +193,9 @@
 </dialog>
 
 <script src="main.js" type="module"></script>
-<script src="chapters.js" type="module"></script>
+<script type="module">
+  import { mount } from './chapters.js';
+  mount({ id: 'battery', chapter: document.getElementById('featured'), rail: document.getElementById('files-rail'), recs: document.getElementById('home-recs') });
+</script>
 </body>
 </html>
