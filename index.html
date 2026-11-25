@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="chapters.css">
 </head>
 <body>
 
@@ -30,11 +29,10 @@
 <header class="hud">
   <a href="#top" class="hud-logo" aria-label="Home">AY<span>_</span></a>
   <nav class="hud-nav" aria-label="Sections">
-    <a href="#about"><span>01</span><i data-i18n="nav.about">about</i></a>
-    <a href="#work"><span>02</span><i data-i18n="nav.work">work</i></a>
-    <a href="#log"><span>03</span><i data-i18n="nav.log">log</i></a>
-    <a href="#shell"><span>04</span><i data-i18n="nav.shell">shell</i></a>
-    <a href="#contact"><span>05</span><i data-i18n="nav.contact">contact</i></a>
+    <a href="project.html"><span>01</span><i data-i18n="nav.work">projects</i></a>
+    <a href="#log"><span>02</span><i data-i18n="nav.log">who am I</i></a>
+    <a href="#shell"><span>03</span><i data-i18n="nav.shell">shell</i></a>
+    <a href="#contact"><span>04</span><i data-i18n="nav.contact">contact</i></a>
   </nav>
   <div class="hud-right">
     <button class="chip" id="lang" aria-label="Switch language">EN<b>/</b>FR</button>
@@ -76,45 +74,20 @@
     </div>
   </div>
 
-  <a href="#about" class="scroll-cue mono"><span data-i18n="hero.scroll">scroll to rev</span> <i></i></a>
+  <a href="#work" class="scroll-cue mono"><span data-i18n="hero.scroll">scroll to rev</span> <i></i></a>
 </section>
 
-<!-- ============ ABOUT ============ -->
-<section id="about" class="section">
-  <h2 class="sec-head"><span class="mono">01</span><span data-i18n="about.title">about</span></h2>
-
-  <div class="about-grid">
-    <p class="about-big reveal" data-i18n="about.big">I like taking an idea, hitting the hard technical wall, and getting past it until it's <em class="serif">actually useful</em>. Half my projects plug into a car.</p>
-
-    <div class="about-copy reveal">
-      <p data-i18n="about.p1">I'm doing my D.E.C. in Computer Science at John Abbott College, working across web, mobile, databases and vehicle diagnostics.</p>
-      <p data-i18n="about.p2">On the side I founded <strong>Apex Esthétique Auto</strong>, a mobile car detailing business. Pricing, booking, invoicing, branding, the website and the ads are all on me — so I'm used to real deadlines and real customers.</p>
-    </div>
-
-    <dl class="stats reveal">
-      <div><dt data-i18n="stat.repos">public repos</dt><dd><span class="count" data-to="12" id="repo-count">12</span></dd></div>
-      <div><dt data-i18n="stat.clients">regular clients, year 1</dt><dd>~<span class="count" data-to="30">30</span></dd></div>
-      <div><dt data-i18n="stat.langs">languages, fluent</dt><dd><span class="count" data-to="2">2</span><small>EN · FR</small></dd></div>
-      <div><dt data-i18n="stat.assets">asset files in my 3D game</dt><dd><span class="count" data-to="0">0</span></dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- ============ WORK ============ -->
-<section id="work" class="section">
-  <h2 class="sec-head"><span class="mono">02</span><span data-i18n="work.title">selected work</span></h2>
-  <p class="sec-sub mono" data-i18n="work.sub">// don't read about my projects. play with them.</p>
-
-  <div class="files-rail" id="files-rail" aria-label="Exploration progress"></div>
-  <p class="mono featured-k" data-i18n="work.feat">// featured case file · 1 of 6</p>
-  <div id="featured"></div>
-  <div id="home-recs" class="home-recs"></div>
-  <a class="mono all-link" href="project.html" data-i18n="work.all">browse all 6 case files →</a>
+<!-- ============ PROJECTS (own page) ============ -->
+<section id="work" class="section work-cta">
+  <a class="proj-cta" href="project.html">
+    <span class="mono pc-k" data-i18n="cta.k">01 · 6 playable case files</span>
+    <span class="pc-t"><span data-i18n="cta.t">Check out my projects</span> <b>→</b></span>
+  </a>
 </section>
 
 <!-- ============ LOG ============ -->
 <section id="log" class="section">
-  <h2 class="sec-head"><span class="mono">03</span><span data-i18n="log.title">who am I</span></h2>
+  <h2 class="sec-head"><span class="mono">02</span><span data-i18n="log.title">who am I</span></h2>
 
   <ol class="timeline">
     <li class="reveal">
@@ -157,7 +130,7 @@
 
 <!-- ============ SHELL ============ -->
 <section id="shell" class="section">
-  <h2 class="sec-head"><span class="mono">04</span><span data-i18n="shell.title">try the shell</span></h2>
+  <h2 class="sec-head"><span class="mono">03</span><span data-i18n="shell.title">try the shell</span></h2>
   <div class="term reveal" id="term">
     <div class="term-bar mono"><i></i><i></i><i></i><span>guest@aidin: ~</span></div>
     <div class="term-out mono" id="term-out" aria-live="polite"></div>
@@ -193,9 +166,5 @@
 </dialog>
 
 <script src="main.js" type="module"></script>
-<script type="module">
-  import { mount } from './chapters.js';
-  mount({ id: 'battery', chapter: document.getElementById('featured'), rail: document.getElementById('files-rail'), recs: document.getElementById('home-recs') });
-</script>
 </body>
 </html>

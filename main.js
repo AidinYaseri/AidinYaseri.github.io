@@ -9,7 +9,7 @@ const GH_USER = 'AidinYaseri';
    i18n (EN / FR)
    ========================================================= */
 const FR = {
-  'nav.about': 'profil', 'nav.work': 'projets', 'nav.log': 'parcours', 'nav.shell': 'terminal', 'nav.contact': 'contact',
+  'nav.work': 'projets', 'nav.log': 'qui suis-je', 'nav.shell': 'terminal', 'nav.contact': 'contact',
   'hero.status': 'disponible pour un stage',
   'hero.lede': 'Étudiant en informatique à Montréal. Je crée des logiciels qui touchent au monde réel — <em class="serif">diagnostic automobile</em>, <em class="serif">télémétrie GPS</em>, applis full-stack et jeux web livrés sans aucun fichier d’asset.',
   'hero.scroll': 'défile pour accélérer',
@@ -19,7 +19,7 @@ const FR = {
   'about.p2': 'À côté, j’ai fondé <strong>Apex Esthétique Auto</strong>, une entreprise mobile de détaillage automobile. Tarifs, rendez-vous, facturation, image de marque, site web et publicités : tout passe par moi — de vraies échéances, de vrais clients.',
   'stat.repos': 'dépôts publics', 'stat.clients': 'clients réguliers, an 1', 'stat.langs': 'langues, couramment', 'stat.assets': 'fichiers d’asset dans mon jeu 3D',
   'work.title': 'projets choisis', 'work.sub': '// ne lis pas mes projets. joue avec.',
-  'work.feat': '// dossier vedette · 1 de 6', 'work.all': 'voir les 6 dossiers →',
+  'cta.k': '01 · 6 dossiers jouables', 'cta.t': 'Découvre mes projets',
   'p.battery.tag': 'retrouve ton chemin',
   'p.battery': 'Un jeu d’horreur à la première personne dans le navigateur. Cinq niveaux, quatre fins et un téléphone à 5 % que chaque action vide. Géométrie, textures, photos, voix et musique sont générées procéduralement à l’exécution — aucun fichier d’asset.',
   'p.tracky': 'Appli iOS native de mesure de performance. Fusionne GPS, accéléromètre, gyroscope et baromètre pour chronométrer le 0–100, le quart de mille et les forces G, avec départ et arrivée détectés automatiquement.',
@@ -213,7 +213,7 @@ fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=pushed`)
   .then(r => r.ok ? r.json() : [])
   .then(repos => {
     REPOS = repos.filter(r => !r.fork);
-    if (REPOS.length) { const rc = $('#repo-count'); rc.dataset.to = REPOS.length; rc.textContent = REPOS.length; }
+    
     for (const r of REPOS) {
       const u = $(`[data-repo="${CSS.escape(r.name)}"] .updated`);
       if (u) u.textContent = '⟳ ' + rtf(r.pushed_at);
@@ -300,11 +300,8 @@ $('#term').addEventListener('click', () => input.focus({ preventScroll: true }))
    ========================================================= */
 const dlg = $('#cmdk'), ci = $('#cmdk-input'), cl = $('#cmdk-list');
 const ACTIONS = [
-  { t: 'Go to About', k: 'section', f: () => go('about') },
-  { t: 'Go to Work', k: 'section', f: () => go('work') },
   { t: 'Go to Who am I', k: 'section', f: () => go('log') },
-  { t: 'Play with the projects', k: 'section', f: () => go('work') },
-  { t: 'All case files (project page)', k: 'page', f: () => { location.href = 'project.html'; } },
+  { t: 'Check out my projects', k: 'page', f: () => { location.href = 'project.html'; } },
   { t: 'Go to Shell', k: 'section', f: () => { go('shell'); setTimeout(() => input.focus({ preventScroll: true }), 600); } },
   { t: 'Go to Contact', k: 'section', f: () => go('contact') },
   ...PROJECTS.map(p => ({ t: 'Open ' + p.name, k: 'project', f: () => window.open(p.url, '_blank', 'noopener') })),
